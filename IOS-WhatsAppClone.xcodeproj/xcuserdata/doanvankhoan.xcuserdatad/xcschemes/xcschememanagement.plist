@@ -7,7 +7,7 @@
 		<key>IOS-WhatsAppClone.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Promises (Playground) 1.xcscheme</key>
 		<dict>
@@ -29,6 +29,24 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>46E4F43E2C32E8A400A48C32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>46E4F44E2C32E8A500A48C32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>46E4F4582C32E8A500A48C32</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
