@@ -21,7 +21,9 @@ struct LoginScreen: View {
                 forgotPasswordButton()
                 
                 AuthButton(title: "Log in now") {
-                    
+                    Task {
+                        await authScreenModel.handleLogin()
+                    }
                 }
                 .disabled(authScreenModel.disableLoginButton)
                 
@@ -34,6 +36,12 @@ struct LoginScreen: View {
             .background(Color.teal.gradient)
             .ignoresSafeArea()
             .navigationBarBackButtonHidden()
+            .alert(isPresented: $authScreenModel.errorState.showError) {
+                Alert(
+                    title: Text(authScreenModel.errorState.errorMessage),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
         }
     }
     

@@ -15,7 +15,6 @@
 		466291762C38297D00E0BF59 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291752C38297D00E0BF59 /* AuthTextField.swift */; };
 		46638CE52C39674100B93132 /* AuthScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE42C39674100B93132 /* AuthScreenModel.swift */; };
 		46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE72C396A3A00B93132 /* AuthProvider.swift */; };
-		46638CEA2C39970D00B93132 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46638CE92C39970D00B93132 /* GoogleService-Info.plist */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
 		46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4462C32E8A500A48C32 /* Assets.xcassets */; };
 		46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4492C32E8A500A48C32 /* Preview Assets.xcassets */; };
@@ -43,6 +42,14 @@
 		46F377E32C39992000B9567D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 46F377E22C39992000B9567D /* FirebaseAuth */; };
 		46F377E52C39992000B9567D /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 46F377E42C39992000B9567D /* FirebaseDatabase */; };
 		46F377E72C39992000B9567D /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 46F377E62C39992000B9567D /* FirebaseDatabaseSwift */; };
+		46F377EB2C39A28600B9567D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 46F377EA2C39A28600B9567D /* GoogleService-Info.plist */; };
+		46F377F12C3A340000B9567D /* RootScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F377F02C3A340000B9567D /* RootScreen.swift */; };
+		46F377F32C3A341F00B9567D /* RootScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F377F22C3A341F00B9567D /* RootScreenModel.swift */; };
+		46F377F82C3A403900B9567D /* UserItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F377F72C3A403900B9567D /* UserItem.swift */; };
+		46F377FB2C3A40A800B9567D /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F377FA2C3A40A800B9567D /* FirebaseConstants.swift */; };
+		46F377FD2C3A43BF00B9567D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 46F377FC2C3A43BF00B9567D /* FirebaseStorage */; };
+		46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */; };
+		46F378012C3A4A0900B9567D /* ChatPartnerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +78,6 @@
 		466291752C38297D00E0BF59 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		46638CE42C39674100B93132 /* AuthScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenModel.swift; sourceTree = "<group>"; };
 		46638CE72C396A3A00B93132 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
-		46638CE92C39970D00B93132 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-WhatsAppClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_WhatsAppCloneApp.swift; sourceTree = "<group>"; };
 		46E4F4462C32E8A500A48C32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -99,6 +105,13 @@
 		46E4F4992C364BF400A48C32 /* BubbleTailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleTailView.swift; sourceTree = "<group>"; };
 		46E4F49C2C364DD800A48C32 /* CustomModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomModifiers.swift; sourceTree = "<group>"; };
 		46E4F49E2C369C5200A48C32 /* BubbleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleImageView.swift; sourceTree = "<group>"; };
+		46F377EA2C39A28600B9567D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		46F377F02C3A340000B9567D /* RootScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreen.swift; sourceTree = "<group>"; };
+		46F377F22C3A341F00B9567D /* RootScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootScreenModel.swift; sourceTree = "<group>"; };
+		46F377F72C3A403900B9567D /* UserItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserItem.swift; sourceTree = "<group>"; };
+		46F377FA2C3A40A800B9567D /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
+		46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPartnerPickerScreen.swift; sourceTree = "<group>"; };
+		46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPartnerRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +120,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				46F377E72C39992000B9567D /* FirebaseDatabaseSwift in Frameworks */,
+				46F377FD2C3A43BF00B9567D /* FirebaseStorage in Frameworks */,
 				46F377E52C39992000B9567D /* FirebaseDatabase in Frameworks */,
 				46F377E32C39992000B9567D /* FirebaseAuth in Frameworks */,
 			);
@@ -132,6 +146,7 @@
 		4662916F2C38288B00E0BF59 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				46F377F62C3A402E00B9567D /* Model */,
 				46638CE62C396A2E00B93132 /* Service */,
 				46638CE32C39672B00B93132 /* ViewModel */,
 				466291702C38289200E0BF59 /* View */,
@@ -192,10 +207,11 @@
 			children = (
 				46E4F4722C344D6700A48C32 /* Screens */,
 				46E4F49B2C364DC200A48C32 /* Helpers */,
+				46F377F92C3A409200B9567D /* Utils */,
 				46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */,
-				46638CE92C39970D00B93132 /* GoogleService-Info.plist */,
 				46E4F46C2C32ECC100A48C32 /* MainTabView.swift */,
 				46E4F4462C32E8A500A48C32 /* Assets.xcassets */,
+				46F377EA2C39A28600B9567D /* GoogleService-Info.plist */,
 				46E4F4482C32E8A500A48C32 /* Preview Content */,
 			);
 			path = "IOS-WhatsAppClone";
@@ -229,6 +245,7 @@
 		46E4F4722C344D6700A48C32 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				46F377ED2C3A33DA00B9567D /* Root */,
 				4662916F2C38288B00E0BF59 /* Auth */,
 				46E4F48A2C3503C200A48C32 /* Chat */,
 				46E4F4792C344DF000A48C32 /* Settings */,
@@ -310,6 +327,8 @@
 			children = (
 				46E4F47E2C34505E00A48C32 /* ChannelTabScreen.swift */,
 				46E4F4802C34530D00A48C32 /* ChannelItemView.swift */,
+				46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */,
+				46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -371,6 +390,47 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		46F377ED2C3A33DA00B9567D /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				46F377EF2C3A33E800B9567D /* ViewModel */,
+				46F377EE2C3A33DF00B9567D /* View */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		46F377EE2C3A33DF00B9567D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				46F377F02C3A340000B9567D /* RootScreen.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		46F377EF2C3A33E800B9567D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				46F377F22C3A341F00B9567D /* RootScreenModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		46F377F62C3A402E00B9567D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				46F377F72C3A403900B9567D /* UserItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		46F377F92C3A409200B9567D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				46F377FA2C3A40A800B9567D /* FirebaseConstants.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -391,6 +451,7 @@
 				46F377E22C39992000B9567D /* FirebaseAuth */,
 				46F377E42C39992000B9567D /* FirebaseDatabase */,
 				46F377E62C39992000B9567D /* FirebaseDatabaseSwift */,
+				46F377FC2C3A43BF00B9567D /* FirebaseStorage */,
 			);
 			productName = "IOS-WhatsAppClone";
 			productReference = 46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */;
@@ -484,8 +545,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */,
+				46F377EB2C39A28600B9567D /* GoogleService-Info.plist in Resources */,
 				46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */,
-				46638CEA2C39970D00B93132 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -512,22 +573,28 @@
 			files = (
 				46E4F46F2C32F4E800A48C32 /* UpdatesTabScreen.swift in Sources */,
 				46638CE52C39674100B93132 /* AuthScreenModel.swift in Sources */,
+				46F377F32C3A341F00B9567D /* RootScreenModel.swift in Sources */,
 				466094732C382D0C008B0F9A /* AuthButton.swift in Sources */,
 				46E4F4712C3446A200A48C32 /* CallTabScreen.swift in Sources */,
+				46F377F82C3A403900B9567D /* UserItem.swift in Sources */,
 				46E4F4842C34FB3900A48C32 /* SettingsTabScreen.swift in Sources */,
 				466291742C38290900E0BF59 /* AuthHeaderView.swift in Sources */,
+				46F377FB2C3A40A800B9567D /* FirebaseConstants.swift in Sources */,
 				46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */,
 				46E4F47C2C344E1600A48C32 /* CommunityTabScreen.swift in Sources */,
 				46E4F4912C36415B00A48C32 /* MessageListController.swift in Sources */,
 				46E4F48F2C3505DC00A48C32 /* TextInputArea.swift in Sources */,
 				46E4F49A2C364BF400A48C32 /* BubbleTailView.swift in Sources */,
+				46F377F12C3A340000B9567D /* RootScreen.swift in Sources */,
 				46E4F47F2C34505E00A48C32 /* ChannelTabScreen.swift in Sources */,
 				464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */,
 				46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */,
+				46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */,
 				46E4F49F2C369C5200A48C32 /* BubbleImageView.swift in Sources */,
 				46E4F4932C36454900A48C32 /* MessageListView.swift in Sources */,
 				466291722C38289D00E0BF59 /* LoginScreen.swift in Sources */,
 				46E4F48D2C3503D800A48C32 /* ChatRoomScreen.swift in Sources */,
+				46F378012C3A4A0900B9567D /* ChatPartnerRowView.swift in Sources */,
 				46E4F4862C34FB9D00A48C32 /* SettingsItemView.swift in Sources */,
 				466291762C38297D00E0BF59 /* AuthTextField.swift in Sources */,
 				46E4F4982C364B1D00A48C32 /* BubbleTextView.swift in Sources */,
@@ -893,6 +960,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabaseSwift;
+		};
+		46F377FC2C3A43BF00B9567D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
