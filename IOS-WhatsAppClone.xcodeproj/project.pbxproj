@@ -50,6 +50,8 @@
 		46F377FD2C3A43BF00B9567D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 46F377FC2C3A43BF00B9567D /* FirebaseStorage */; };
 		46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */; };
 		46F378012C3A4A0900B9567D /* ChatPartnerRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */; };
+		46F378072C3BE06500B9567D /* ChatPartnerPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F378062C3BE06500B9567D /* ChatPartnerPickerViewModel.swift */; };
+		46F378092C3BE45500B9567D /* AddGroupChatPartnersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46F378082C3BE45500B9567D /* AddGroupChatPartnersScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +114,8 @@
 		46F377FA2C3A40A800B9567D /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPartnerPickerScreen.swift; sourceTree = "<group>"; };
 		46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPartnerRowView.swift; sourceTree = "<group>"; };
+		46F378062C3BE06500B9567D /* ChatPartnerPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPartnerPickerViewModel.swift; sourceTree = "<group>"; };
+		46F378082C3BE45500B9567D /* AddGroupChatPartnersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupChatPartnersScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -292,6 +296,7 @@
 		46E4F4772C344DD700A48C32 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				46F378052C3BE04200B9567D /* ViewModel */,
 				46E4F47D2C34505400A48C32 /* View */,
 			);
 			path = Channel;
@@ -329,6 +334,7 @@
 				46E4F4802C34530D00A48C32 /* ChannelItemView.swift */,
 				46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */,
 				46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */,
+				46F378082C3BE45500B9567D /* AddGroupChatPartnersScreen.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -429,6 +435,14 @@
 				46F377FA2C3A40A800B9567D /* FirebaseConstants.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		46F378052C3BE04200B9567D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				46F378062C3BE06500B9567D /* ChatPartnerPickerViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -588,6 +602,7 @@
 				46F377F12C3A340000B9567D /* RootScreen.swift in Sources */,
 				46E4F47F2C34505E00A48C32 /* ChannelTabScreen.swift in Sources */,
 				464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */,
+				46F378092C3BE45500B9567D /* AddGroupChatPartnersScreen.swift in Sources */,
 				46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */,
 				46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */,
 				46E4F49F2C369C5200A48C32 /* BubbleImageView.swift in Sources */,
@@ -603,6 +618,7 @@
 				46E4F49D2C364DD800A48C32 /* CustomModifiers.swift in Sources */,
 				466291612C38003D00E0BF59 /* BubbleAudioView.swift in Sources */,
 				46E4F46D2C32ECC100A48C32 /* MainTabView.swift in Sources */,
+				46F378072C3BE06500B9567D /* ChatPartnerPickerViewModel.swift in Sources */,
 				46E4F4892C34FC5200A48C32 /* SettingsItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
