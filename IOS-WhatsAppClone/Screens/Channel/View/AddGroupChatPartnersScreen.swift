@@ -14,7 +14,7 @@ struct AddGroupChatPartnersScreen: View {
         List {
             
             if viewModel.showSelectUsers {
-                Text("Users Selected")
+                Image(systemName: "user")
             }
             
             Section {
