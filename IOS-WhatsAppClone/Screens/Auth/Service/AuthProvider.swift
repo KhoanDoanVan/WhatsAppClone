@@ -67,7 +67,7 @@ final class AuthManager: AuthProvider {
     
     func login(with email: String, and password: String) async throws {
         do {
-            let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
+            _ = try await Auth.auth().signIn(withEmail: email, password: password)
             fetchCurrentUserInfo()
         } catch {
             print("🔐 Failed to Sign in an Account: \(error.localizedDescription)")

@@ -8,8 +8,12 @@
 import Foundation
 
 enum ChannelCreateRoute {
-    case addGroupChatMembers
+    case groupPartnerPicker
     case setUpGroupChat
+}
+
+enum ChannelContants {
+    static let maxGroupParticipants = 12
 }
 
 final class ChatPartnerPickerViewModel: ObservableObject {
@@ -18,6 +22,10 @@ final class ChatPartnerPickerViewModel: ObservableObject {
     
     var showSelectUsers: Bool {
         return !selectedChatPartners.isEmpty
+    }
+    
+    var disableNextButton: Bool {
+        return selectedChatPartners.isEmpty
     }
     
     
