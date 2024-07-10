@@ -17,6 +17,7 @@
 		46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE72C396A3A00B93132 /* AuthProvider.swift */; };
 		4688D15A2C3CE24F008CCB99 /* SelectedChatPartnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */; };
 		4688D15C2C3CE95A008CCB99 /* NewGroupSetupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */; };
+		4688D1602C3EC5D5008CCB99 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15F2C3EC5D5008CCB99 /* UserService.swift */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
 		46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4462C32E8A500A48C32 /* Assets.xcassets */; };
 		46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4492C32E8A500A48C32 /* Preview Assets.xcassets */; };
@@ -84,6 +85,7 @@
 		46638CE72C396A3A00B93132 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
 		4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedChatPartnerView.swift; sourceTree = "<group>"; };
 		4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupSetupScreen.swift; sourceTree = "<group>"; };
+		4688D15F2C3EC5D5008CCB99 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-WhatsAppClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_WhatsAppCloneApp.swift; sourceTree = "<group>"; };
 		46E4F4462C32E8A500A48C32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -190,6 +192,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		4688D15E2C3EC5BC008CCB99 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				4688D15F2C3EC5D5008CCB99 /* UserService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		46E4F4362C32E8A400A48C32 = {
 			isa = PBXGroup;
 			children = (
@@ -215,6 +225,7 @@
 			children = (
 				46E4F4722C344D6700A48C32 /* Screens */,
 				46E4F49B2C364DC200A48C32 /* Helpers */,
+				4688D15E2C3EC5BC008CCB99 /* Services */,
 				46F377F92C3A409200B9567D /* Utils */,
 				46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */,
 				46E4F46C2C32ECC100A48C32 /* MainTabView.swift */,
@@ -337,8 +348,8 @@
 				46E4F47E2C34505E00A48C32 /* ChannelTabScreen.swift */,
 				46E4F4802C34530D00A48C32 /* ChannelItemView.swift */,
 				46F377FE2C3A47A300B9567D /* ChatPartnerPickerScreen.swift */,
-				46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */,
 				46F378082C3BE45500B9567D /* GroupChatPartnersScreen.swift */,
+				46F378002C3A4A0900B9567D /* ChatPartnerRowView.swift */,
 				4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */,
 				4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */,
 			);
@@ -623,6 +634,7 @@
 				46E4F4982C364B1D00A48C32 /* BubbleTextView.swift in Sources */,
 				46E4F4962C364A6600A48C32 /* MessageItem.swift in Sources */,
 				46E4F4812C34530D00A48C32 /* ChannelItemView.swift in Sources */,
+				4688D1602C3EC5D5008CCB99 /* UserService.swift in Sources */,
 				46E4F49D2C364DD800A48C32 /* CustomModifiers.swift in Sources */,
 				466291612C38003D00E0BF59 /* BubbleAudioView.swift in Sources */,
 				46E4F46D2C32ECC100A48C32 /* MainTabView.swift in Sources */,
