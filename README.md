@@ -1,11 +1,11 @@
 # WhatsAppClone
 
 Channel
--- channelId: Random String
--- admins: [uid, uid, uid]
--- members: [uid, uid, uid, uid]
--- creationDate: TimeInterval
--- membersCount: Int
+<div>-- channelId: Random String</div>
+<div>-- admins: [uid, uid, uid]</div>
+<div>-- members: [uid, uid, uid, uid]</div>
+<div>-- creationDate: TimeInterval</div>
+<div>-- membersCount: Int</div>
 
 Channel-Messages
 -- channelId
