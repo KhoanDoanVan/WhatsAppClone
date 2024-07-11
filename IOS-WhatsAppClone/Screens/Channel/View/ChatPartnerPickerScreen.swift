@@ -12,19 +12,24 @@ struct ChatPartnerPickerScreen: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel = ChatPartnerPickerViewModel()
     
+    var onCreate: (_ newChannel: ChannelItem) -> Void
+    
     var body: some View {
         NavigationStack(path: $viewModel.navStack) {
             List {
                 ForEach(ChatPartnerPickerOption.allCases) { item in
-                    HeaderItemView(item: item)
-                        .onTapGesture {
-                            viewModel.navStack.append(.groupPartnerPicker)
-                        }
+                    HeaderItemView(item: item) {
+                        guard item == ChatPartnerPickerOption.newGroup else { return }
+                        viewModel.navStack.append(.groupPartnerPicker)
+                    }
                 }
                 
                 Section {
                     ForEach(viewModel.users) { user in
                         ChatPartnerRowView(user: user)
+                            .onTapGesture {
+                                onCreate(.placeholder)
+                            }
                     }
                 } header: {
                     Text("Contacts on WhatsApp")
@@ -101,9 +106,10 @@ extension ChatPartnerPickerScreen {
     
     private struct HeaderItemView: View {
         let item: ChatPartnerPickerOption
+        let onTapHandler: () -> Void
         var body: some View {
             Button {
-                
+                onTapHandler()
             } label: {
                 buttonBody()
             }
@@ -150,5 +156,7 @@ enum ChatPartnerPickerOption: String, CaseIterable, Identifiable {
 }
 
 #Preview {
-    ChatPartnerPickerScreen()
+    ChatPartnerPickerScreen { channel in
+        
+    }
 }

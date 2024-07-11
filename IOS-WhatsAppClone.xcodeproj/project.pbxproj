@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		463BBE5F2C3F87C500936277 /* ChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE5E2C3F87C500936277 /* ChannelItem.swift */; };
+		463BBE612C3F8F0400936277 /* ChannelTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */; };
 		464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464E7C852C39642B0069A1C8 /* SignUpScreen.swift */; };
 		466094732C382D0C008B0F9A /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466094722C382D0C008B0F9A /* AuthButton.swift */; };
 		466291612C38003D00E0BF59 /* BubbleAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291602C38003D00E0BF59 /* BubbleAudioView.swift */; };
@@ -75,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		463BBE5E2C3F87C500936277 /* ChannelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItem.swift; sourceTree = "<group>"; };
+		463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTabViewModel.swift; sourceTree = "<group>"; };
 		464E7C852C39642B0069A1C8 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		466094722C382D0C008B0F9A /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		466291602C38003D00E0BF59 /* BubbleAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleAudioView.swift; sourceTree = "<group>"; };
@@ -153,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		463BBE5D2C3F879200936277 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				463BBE5E2C3F87C500936277 /* ChannelItem.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4662916F2C38288B00E0BF59 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 		46E4F4772C344DD700A48C32 /* Channel */ = {
 			isa = PBXGroup;
 			children = (
+				463BBE5D2C3F879200936277 /* Model */,
 				46F378052C3BE04200B9567D /* ViewModel */,
 				46E4F47D2C34505400A48C32 /* View */,
 			);
@@ -458,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				46F378062C3BE06500B9567D /* ChatPartnerPickerViewModel.swift */,
+				463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -610,6 +624,7 @@
 				46F377F82C3A403900B9567D /* UserItem.swift in Sources */,
 				46E4F4842C34FB3900A48C32 /* SettingsTabScreen.swift in Sources */,
 				466291742C38290900E0BF59 /* AuthHeaderView.swift in Sources */,
+				463BBE612C3F8F0400936277 /* ChannelTabViewModel.swift in Sources */,
 				4688D15A2C3CE24F008CCB99 /* SelectedChatPartnerView.swift in Sources */,
 				46F377FB2C3A40A800B9567D /* FirebaseConstants.swift in Sources */,
 				46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */,
@@ -618,6 +633,7 @@
 				46E4F48F2C3505DC00A48C32 /* TextInputArea.swift in Sources */,
 				46E4F49A2C364BF400A48C32 /* BubbleTailView.swift in Sources */,
 				46F377F12C3A340000B9567D /* RootScreen.swift in Sources */,
+				463BBE5F2C3F87C500936277 /* ChannelItem.swift in Sources */,
 				46E4F47F2C34505E00A48C32 /* ChannelTabScreen.swift in Sources */,
 				464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */,
 				46F378092C3BE45500B9567D /* GroupChatPartnersScreen.swift in Sources */,
