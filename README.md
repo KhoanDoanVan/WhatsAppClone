@@ -17,8 +17,8 @@ User-Direct-Messages
 <div>---- channelId1: true</div>
 <div>---- channelId2: true</div>
 <br/>
-Direct Channels: unique, 1:1, communication with 2 members
-Group Channels: non-unique, 3 to 12 members
+<div>Direct Channels: unique, 1:1, communication with 2 members</div>
+<div>Group Channels: non-unique, 3 to 12 members</div>
 <br/>
-- Denormalization: Optimize for Read operations, sacrificing Write
-- Storage is cheap in firebase
+<div>- Denormalization: Optimize for Read operations, sacrificing Write</div>
+<div>- Storage is cheap in firebase</div>
