@@ -28,7 +28,7 @@ struct ChatPartnerPickerScreen: View {
                     ForEach(viewModel.users) { user in
                         ChatPartnerRowView(user: user)
                             .onTapGesture {
-                                onCreate(.placeholder)
+                                viewModel.createDirectChannel(user, completion: onCreate)
                             }
                     }
                 } header: {
@@ -54,6 +54,9 @@ struct ChatPartnerPickerScreen: View {
             .toolbar {
                 trailingNavItem()
             }
+            .onAppear {
+                viewModel.deSelectAllChatPartners()
+            }
         }
     }
     
@@ -74,7 +77,7 @@ extension ChatPartnerPickerScreen {
         case .groupPartnerPicker:
             GroupPartnerPickerScreen(viewModel: viewModel)
         case .setUpGroupChat:
-            NewGroupSetupScreen(viewModel: viewModel)
+            NewGroupSetupScreen(viewModel: viewModel, onCreate: onCreate)
         }
     }
 }
