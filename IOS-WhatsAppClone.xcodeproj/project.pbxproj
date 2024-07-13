@@ -22,6 +22,8 @@
 		4688D15A2C3CE24F008CCB99 /* SelectedChatPartnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */; };
 		4688D15C2C3CE95A008CCB99 /* NewGroupSetupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */; };
 		4688D1602C3EC5D5008CCB99 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15F2C3EC5D5008CCB99 /* UserService.swift */; };
+		468C1A6A2C428C3900C5F66D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A692C428C3900C5F66D /* ChatRoomViewModel.swift */; };
+		468C1A6C2C428D8F00C5F66D /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6B2C428D8F00C5F66D /* MessageService.swift */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
 		46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4462C32E8A500A48C32 /* Assets.xcassets */; };
 		46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4492C32E8A500A48C32 /* Preview Assets.xcassets */; };
@@ -94,6 +96,8 @@
 		4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedChatPartnerView.swift; sourceTree = "<group>"; };
 		4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupSetupScreen.swift; sourceTree = "<group>"; };
 		4688D15F2C3EC5D5008CCB99 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		468C1A692C428C3900C5F66D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
+		468C1A6B2C428D8F00C5F66D /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
 		46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-WhatsAppClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_WhatsAppCloneApp.swift; sourceTree = "<group>"; };
 		46E4F4462C32E8A500A48C32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -220,8 +224,17 @@
 			isa = PBXGroup;
 			children = (
 				4688D15F2C3EC5D5008CCB99 /* UserService.swift */,
+				468C1A6B2C428D8F00C5F66D /* MessageService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		468C1A682C428C2E00C5F66D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				468C1A692C428C3900C5F66D /* ChatRoomViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		46E4F4362C32E8A400A48C32 = {
@@ -402,6 +415,7 @@
 		46E4F48A2C3503C200A48C32 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				468C1A682C428C2E00C5F66D /* ViewModel */,
 				46E4F4942C364A5000A48C32 /* Models */,
 				46E4F48B2C3503C800A48C32 /* View */,
 			);
@@ -647,7 +661,9 @@
 				463BBE652C40CC6F00936277 /* String+Extensions.swift in Sources */,
 				46E4F48F2C3505DC00A48C32 /* TextInputArea.swift in Sources */,
 				46E4F49A2C364BF400A48C32 /* BubbleTailView.swift in Sources */,
+				468C1A6C2C428D8F00C5F66D /* MessageService.swift in Sources */,
 				46F377F12C3A340000B9567D /* RootScreen.swift in Sources */,
+				468C1A6A2C428C3900C5F66D /* ChatRoomViewModel.swift in Sources */,
 				463BBE5F2C3F87C500936277 /* ChannelItem.swift in Sources */,
 				46E4F47F2C34505E00A48C32 /* ChannelTabScreen.swift in Sources */,
 				464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */,
