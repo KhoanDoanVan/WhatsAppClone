@@ -9,12 +9,11 @@ import Foundation
 
 // MARK: Handles sending and fetching messages and settings reactions
 struct MessageService {
-    
-    
     static func sendTextMessages(
         to channel: ChannelItem,
         from currentUser: UserItem,
-        _ textMessage: String, onComplete: () -> Void
+        _ textMessage: String,
+        onComplete: () -> Void
     ) {
         
         let timeStamp = Date().timeIntervalSince1970
@@ -36,5 +35,21 @@ struct MessageService {
         FirebaseConstants.MessagesRef.child(channel.id).child(messageId).setValue(messageDict)
         
         onComplete()
+    }
+    
+    static func getMessages(for channel: ChannelItem, completion: @escaping ([MessageItem]) -> Void) {
+        FirebaseConstants.MessagesRef.child(channel.id).observe(.value) { snapshot in
+            guard let dict = snapshot.value as? [String: Any] else { return }
+            var messages: [MessageItem] = []
+            dict.forEach { key, value in
+                let messageDict = value as? [String: Any] ?? [:]
+                let message = MessageItem(id: key, dict: messageDict)
+                messages.append(message)
+                completion(messages)
+            }
+        } withCancel: { error in
+            print("Failed to get messages for \(channel.title)")
+        }
+
     }
 }

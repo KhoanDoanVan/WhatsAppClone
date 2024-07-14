@@ -59,7 +59,7 @@ final class ChannelTabViewModel: ObservableObject {
     private func getChannelMembers(_ channel: ChannelItem, completion: @escaping (_ members: [UserItem]) -> Void) {
         guard let currentUid = Auth.auth().currentUser?.uid else { return }
         let channelMemberUids = Array(channel.membersUids.filter{ $0 != currentUid })
-        UserService.getUsers(with: channel.membersUids) { userNode in
+        UserService.getUsers(with: channelMemberUids) { userNode in
             completion(userNode.users)
         }
     }
