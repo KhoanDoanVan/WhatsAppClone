@@ -24,6 +24,8 @@
 		4688D1602C3EC5D5008CCB99 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15F2C3EC5D5008CCB99 /* UserService.swift */; };
 		468C1A6A2C428C3900C5F66D /* ChatRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A692C428C3900C5F66D /* ChatRoomViewModel.swift */; };
 		468C1A6C2C428D8F00C5F66D /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6B2C428D8F00C5F66D /* MessageService.swift */; };
+		468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */; };
+		468C1A702C43904100C5F66D /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
 		46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4462C32E8A500A48C32 /* Assets.xcassets */; };
 		46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4492C32E8A500A48C32 /* Preview Assets.xcassets */; };
@@ -98,6 +100,8 @@
 		4688D15F2C3EC5D5008CCB99 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		468C1A692C428C3900C5F66D /* ChatRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewModel.swift; sourceTree = "<group>"; };
 		468C1A6B2C428D8F00C5F66D /* MessageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageService.swift; sourceTree = "<group>"; };
+		468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreationTextView.swift; sourceTree = "<group>"; };
+		468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
 		46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-WhatsAppClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_WhatsAppCloneApp.swift; sourceTree = "<group>"; };
 		46E4F4462C32E8A500A48C32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -428,6 +432,8 @@
 				46E4F48C2C3503D800A48C32 /* ChatRoomScreen.swift */,
 				46E4F4922C36454900A48C32 /* MessageListView.swift */,
 				46E4F4902C36415B00A48C32 /* MessageListController.swift */,
+				468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */,
+				468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */,
 				46E4F48E2C3505DC00A48C32 /* TextInputArea.swift */,
 				46E4F4972C364B1D00A48C32 /* BubbleTextView.swift */,
 				46E4F49E2C369C5200A48C32 /* BubbleImageView.swift */,
@@ -657,6 +663,7 @@
 				46F377FB2C3A40A800B9567D /* FirebaseConstants.swift in Sources */,
 				46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */,
 				46E4F47C2C344E1600A48C32 /* CommunityTabScreen.swift in Sources */,
+				468C1A702C43904100C5F66D /* AdminMessageTextView.swift in Sources */,
 				46E4F4912C36415B00A48C32 /* MessageListController.swift in Sources */,
 				463BBE652C40CC6F00936277 /* String+Extensions.swift in Sources */,
 				46E4F48F2C3505DC00A48C32 /* TextInputArea.swift in Sources */,
@@ -670,6 +677,7 @@
 				46F378092C3BE45500B9567D /* GroupChatPartnersScreen.swift in Sources */,
 				46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */,
 				46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */,
+				468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */,
 				46E4F49F2C369C5200A48C32 /* BubbleImageView.swift in Sources */,
 				4688D15C2C3CE95A008CCB99 /* NewGroupSetupScreen.swift in Sources */,
 				46E4F4932C36454900A48C32 /* MessageListView.swift in Sources */,

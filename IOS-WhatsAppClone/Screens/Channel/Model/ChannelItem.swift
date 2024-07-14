@@ -42,6 +42,14 @@ struct ChannelItem: Identifiable {
         }
     }
     
+    var isCreatedByMe: Bool {
+        return createdBy == Auth.auth().currentUser?.uid ?? ""
+    }
+    
+    var creatorName: String {
+        return members.first { $0.uid == createdBy }?.username ?? "Someone" // looping through the channel members to find the member that created the channel
+    }
+    
     private var groupMemberNames: String {
         let membersCount = membersCount - 1
         let fullNames: [String] = membersExcludingMe.map{ $0.username }
