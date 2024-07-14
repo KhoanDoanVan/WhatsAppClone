@@ -19,6 +19,7 @@
 		466291762C38297D00E0BF59 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291752C38297D00E0BF59 /* AuthTextField.swift */; };
 		46638CE52C39674100B93132 /* AuthScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE42C39674100B93132 /* AuthScreenModel.swift */; };
 		46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE72C396A3A00B93132 /* AuthProvider.swift */; };
+		467439A42C43B9AD000F37FE /* CircularProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 467439A32C43B9AD000F37FE /* CircularProfileImageView.swift */; };
 		4688D15A2C3CE24F008CCB99 /* SelectedChatPartnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */; };
 		4688D15C2C3CE95A008CCB99 /* NewGroupSetupScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */; };
 		4688D1602C3EC5D5008CCB99 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4688D15F2C3EC5D5008CCB99 /* UserService.swift */; };
@@ -26,6 +27,7 @@
 		468C1A6C2C428D8F00C5F66D /* MessageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6B2C428D8F00C5F66D /* MessageService.swift */; };
 		468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */; };
 		468C1A702C43904100C5F66D /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */; };
+		468C1A732C43B92800C5F66D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 468C1A722C43B92800C5F66D /* Kingfisher */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
 		46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4462C32E8A500A48C32 /* Assets.xcassets */; };
 		46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4492C32E8A500A48C32 /* Preview Assets.xcassets */; };
@@ -95,6 +97,7 @@
 		466291752C38297D00E0BF59 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		46638CE42C39674100B93132 /* AuthScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenModel.swift; sourceTree = "<group>"; };
 		46638CE72C396A3A00B93132 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		467439A32C43B9AD000F37FE /* CircularProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularProfileImageView.swift; sourceTree = "<group>"; };
 		4688D1592C3CE24F008CCB99 /* SelectedChatPartnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedChatPartnerView.swift; sourceTree = "<group>"; };
 		4688D15B2C3CE95A008CCB99 /* NewGroupSetupScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupSetupScreen.swift; sourceTree = "<group>"; };
 		4688D15F2C3EC5D5008CCB99 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
@@ -149,6 +152,7 @@
 				46F377FD2C3A43BF00B9567D /* FirebaseStorage in Frameworks */,
 				46F377E52C39992000B9567D /* FirebaseDatabase in Frameworks */,
 				46F377E32C39992000B9567D /* FirebaseAuth in Frameworks */,
+				468C1A732C43B92800C5F66D /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,6 +228,14 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
+		467439A22C43B999000F37FE /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				467439A32C43B9AD000F37FE /* CircularProfileImageView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		4688D15E2C3EC5BC008CCB99 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +276,7 @@
 		46E4F4412C32E8A400A48C32 /* IOS-WhatsAppClone */ = {
 			isa = PBXGroup;
 			children = (
+				467439A22C43B999000F37FE /* Components */,
 				46E4F4722C344D6700A48C32 /* Screens */,
 				4688D15E2C3EC5BC008CCB99 /* Services */,
 				463BBE632C40CC5100936277 /* Extensions */,
@@ -531,6 +544,7 @@
 				46F377E42C39992000B9567D /* FirebaseDatabase */,
 				46F377E62C39992000B9567D /* FirebaseDatabaseSwift */,
 				46F377FC2C3A43BF00B9567D /* FirebaseStorage */,
+				468C1A722C43B92800C5F66D /* Kingfisher */,
 			);
 			productName = "IOS-WhatsAppClone";
 			productReference = 46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */;
@@ -606,6 +620,7 @@
 			mainGroup = 46E4F4362C32E8A400A48C32;
 			packageReferences = (
 				46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				468C1A712C43B92800C5F66D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 46E4F4402C32E8A400A48C32 /* Products */;
 			projectDirPath = "";
@@ -653,6 +668,7 @@
 				46E4F46F2C32F4E800A48C32 /* UpdatesTabScreen.swift in Sources */,
 				46638CE52C39674100B93132 /* AuthScreenModel.swift in Sources */,
 				46F377F32C3A341F00B9567D /* RootScreenModel.swift in Sources */,
+				467439A42C43B9AD000F37FE /* CircularProfileImageView.swift in Sources */,
 				466094732C382D0C008B0F9A /* AuthButton.swift in Sources */,
 				46E4F4712C3446A200A48C32 /* CallTabScreen.swift in Sources */,
 				46F377F82C3A403900B9567D /* UserItem.swift in Sources */,
@@ -1027,6 +1043,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		468C1A712C43B92800C5F66D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
 		46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1038,6 +1062,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		468C1A722C43B92800C5F66D /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 468C1A712C43B92800C5F66D /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		46F377E22C39992000B9567D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
