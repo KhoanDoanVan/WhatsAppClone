@@ -8,7 +8,7 @@
 import Foundation
 import Firebase
 
-struct ChannelItem: Identifiable {
+struct ChannelItem: Identifiable, Hashable {
     var id: String
     var name: String?
     var lastMessage: String
