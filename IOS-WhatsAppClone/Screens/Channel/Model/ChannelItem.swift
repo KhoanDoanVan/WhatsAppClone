@@ -62,6 +62,10 @@ struct ChannelItem: Identifiable, Hashable {
         return members.first { $0.uid == createdBy }?.username ?? "Someone" // looping through the channel members to find the member that created the channel
     }
     
+    var allMembersFetched: Bool {
+        return members.count == membersCount
+    }
+    
     private var groupMemberNames: String {
         let membersCount = membersCount - 1
         let fullNames: [String] = membersExcludingMe.map{ $0.username }

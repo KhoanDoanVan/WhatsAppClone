@@ -33,10 +33,18 @@ final class ChatRoomViewModel : ObservableObject {
         AuthManager.shared.authState
             .receive(on: DispatchQueue.main)
             .sink { [weak self] authState in
+                guard let self = self else { return }
                     switch authState {
                         case .loggedIn(let currentUser):
-                            self?.currentUser = currentUser
-                            self?.getMessages()
+                            self.currentUser = currentUser
+                        
+                            if self.channel.allMembersFetched {
+                                self.getMessages()
+                            } else {
+                                self.getAllChannelMembers()
+                                print("here")
+                            }
+                        
                         default:
                             break
                     }
@@ -54,6 +62,20 @@ final class ChatRoomViewModel : ObservableObject {
         MessageService.getMessages(for: channel) {[weak self] messages in
             self?.messages = messages
             print("messages: \(messages.map { $0.text })")
+        }
+    }
+    
+    private func getAllChannelMembers() {
+        /// I already have current user, and potentially 2 others members so no need to refetch those
+        guard let currentUser = currentUser else { return }
+        let membersAlreadyFetched = channel.members.compactMap{ $0.uid }
+        let memberUIDSToFetch = channel.membersUids.filter{ !membersAlreadyFetched.contains($0) }
+
+        UserService.getUsers(with: memberUIDSToFetch) { [weak self] userNode in
+            guard let self = self else { return }
+            self.channel.members.append(contentsOf: userNode.users)
+            self.getMessages()
+            print("getAllChannelMembers: \(channel.members.map{ $0.username } )")
         }
     }
 }

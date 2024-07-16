@@ -520,8 +520,8 @@
 		46F378052C3BE04200B9567D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				46F378062C3BE06500B9567D /* ChatPartnerPickerViewModel.swift */,
 				463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */,
+				46F378062C3BE06500B9567D /* ChatPartnerPickerViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";

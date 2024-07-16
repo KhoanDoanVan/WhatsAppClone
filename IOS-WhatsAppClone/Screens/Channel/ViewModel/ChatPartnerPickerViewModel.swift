@@ -6,6 +6,7 @@
 //
 
 import Firebase
+import Combine
 
 enum ChannelCreateRoute {
     case groupPartnerPicker
@@ -29,6 +30,8 @@ final class ChatPartnerPickerViewModel: ObservableObject {
     @Published var errorState: (showError: Bool, errorMessage: String) = (false, "Uh oh")
     
     private var lastCursor: String?
+    private var userCurrent: UserItem?
+    private var subscription: AnyCancellable?
     
     var showSelectUsers: Bool {
         return !selectedChatPartners.isEmpty
@@ -47,8 +50,27 @@ final class ChatPartnerPickerViewModel: ObservableObject {
     }
     
     init() {
-        Task {
-            await fetchUsers()
+        listenForAuthState()
+    }
+    
+    deinit {
+        subscription?.cancel()
+        subscription = nil
+    }
+    
+    // fetch user current
+    private func listenForAuthState() {
+        subscription = AuthManager.shared.authState.receive(on: DispatchQueue.main)
+            .sink { [weak self] authState in
+            switch authState {
+            case .loggedIn(let loggedInUser):
+                self?.userCurrent = loggedInUser
+                Task {
+                    await self?.fetchUsers()
+                }
+            default:
+                break
+            }
         }
     }
     
@@ -106,6 +128,9 @@ final class ChatPartnerPickerViewModel: ObservableObject {
                 let channelDict = snapshot.value as! [String: Any]
                 var directChannel = ChannelItem(channelDict)
                 directChannel.members = selectedChatPartners
+                if let userCurrent {
+                    directChannel.members.append(userCurrent)
+                }
                 completion(directChannel)
             } else {
                 // create a new DM with the user
@@ -204,6 +229,9 @@ final class ChatPartnerPickerViewModel: ObservableObject {
         
         var newChannelItem = ChannelItem(channelDict)
         newChannelItem.members = selectedChatPartners
+        if let userCurrent {
+            newChannelItem.members.append(userCurrent)
+        }
         return .success(newChannelItem)
     }
 }
