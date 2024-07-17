@@ -47,7 +47,6 @@ final class ChannelTabViewModel: ObservableObject {
         } withCancel: { error in
             print("Failed to get the current user's channelIds: \(error.localizedDescription)")
         }
-
     }
     
     private func getChannel(with channelId: String) {
@@ -56,12 +55,9 @@ final class ChannelTabViewModel: ObservableObject {
             var channel = ChannelItem(dict)
             self.getChannelMembers(channel) { members in
                 channel.members = members
-                if channel.isGroupChat == false {
-                    channel.members.append(self.currentUser)
-                }
+                channel.members.append(self.currentUser)
                 self.channelDictionary[channelId] = channel
                 self.reloadData()
-//                self?.channels.append(channel)
             }
         } withCancel: { error in
             print("Failed to get the channel for id \(channelId): \(error.localizedDescription)")
