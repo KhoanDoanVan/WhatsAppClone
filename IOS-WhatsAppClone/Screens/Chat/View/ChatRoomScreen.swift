@@ -39,7 +39,7 @@ struct ChatRoomScreen: View {
         VStack(spacing: 0) {
             Divider()
             if viewModel.showPhotoPickerPreview {
-                MediaAttachmentPreview(selectedPhotos: viewModel.selectedPhotos)
+                MediaAttachmentPreview(mediaAttachment: viewModel.mediaAttachment)
                 Divider()
             }
             TextInputArea(textMessage: $viewModel.textMessage) { action in 

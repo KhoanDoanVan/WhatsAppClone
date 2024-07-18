@@ -37,9 +37,6 @@ struct TextInputArea: View {
             .background(
                 RoundedRectangle(cornerRadius: 20, style: .continuous).fill(.thinMaterial)
             )
-//            .overlay(
-//                textViewBorder()
-//            )
     }
     
     private func textViewBorder() -> some View {

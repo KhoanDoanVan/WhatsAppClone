@@ -16,7 +16,7 @@ final class ChatRoomViewModel : ObservableObject {
     @Published var messages = [MessageItem]()
     @Published var showPhotoPicker = false
     @Published var photoPickerItems: [PhotosPickerItem] = []
-    @Published var selectedPhotos: [UIImage] = []
+    @Published var mediaAttachment: [MediaAttachment] = []
     
     
     private(set) var channel: ChannelItem // get set the propertise has been private in this class
@@ -24,7 +24,7 @@ final class ChatRoomViewModel : ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     
     var showPhotoPickerPreview: Bool {
-        return !photoPickerItems.isEmpty
+        return !mediaAttachment.isEmpty
     }
     
     init(_ channel: ChannelItem) {
@@ -90,10 +90,8 @@ final class ChatRoomViewModel : ObservableObject {
         }
     }
     
-    
     func handleTextInputArea(_ action: TextInputArea.UserAction) {
         switch action {
-            
         case .presentPhotoPicker:
             showPhotoPicker = true
         case .sendMessage:
@@ -111,15 +109,28 @@ final class ChatRoomViewModel : ObservableObject {
         }.store(in: &subscriptions)
     }
     
-    
     @MainActor
     private func parsePhotoPickerItem(_ photoPickerItems: [PhotosPickerItem]) async {
         for photoItem in photoPickerItems {
-            guard let data = try? await photoItem.loadTransferable(type: Data.self),
-                  let uiImage = UIImage(data: data)
-            else { return }
             
-            self.selectedPhotos.insert(uiImage, at: 0)
+            if photoItem.isVideo {
+                
+                if let movie = try? await photoItem.loadTransferable(type: VideoPickerTransferable.self),
+                   let thumbnailImage = try? await movie.url.generateVideoThumbnail() 
+                {
+                    let videoAttachment = MediaAttachment(id: UUID().uuidString, type: .video(thumbnailImage, movie.url))
+                    self.mediaAttachment.insert(videoAttachment, at: 0)
+                }
+                    
+            } else {
+                guard let data = try? await photoItem.loadTransferable(type: Data.self),
+                      let thumbnail = UIImage(data: data)
+                else { return }
+    
+                let photoAttachment = MediaAttachment(id: UUID().uuidString, type: .photo(thumbnail))
+                self.mediaAttachment.insert(photoAttachment, at: 0)
+            }
+
         }
     }
 }
