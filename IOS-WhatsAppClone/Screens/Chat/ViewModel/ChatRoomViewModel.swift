@@ -7,19 +7,30 @@
 
 import Foundation
 import Combine
+import PhotosUI
+import SwiftUI
 
 
 final class ChatRoomViewModel : ObservableObject {
     @Published var textMessage = ""
     @Published var messages = [MessageItem]()
+    @Published var showPhotoPicker = false
+    @Published var photoPickerItems: [PhotosPickerItem] = []
+    @Published var selectedPhotos: [UIImage] = []
+    
     
     private(set) var channel: ChannelItem // get set the propertise has been private in this class
     private var currentUser: UserItem?
     private var subscriptions = Set<AnyCancellable>()
     
+    var showPhotoPickerPreview: Bool {
+        return !photoPickerItems.isEmpty
+    }
+    
     init(_ channel: ChannelItem) {
         self.channel = channel
         listenToAuthState()
+        onPhotoPickerSelection()
     }
     
     deinit {
@@ -67,7 +78,7 @@ final class ChatRoomViewModel : ObservableObject {
     
     private func getAllChannelMembers() {
         /// I already have current user, and potentially 2 others members so no need to refetch those
-        guard let currentUser = currentUser else { return }
+        guard let _ = currentUser else { return }
         let membersAlreadyFetched = channel.members.compactMap{ $0.uid }
         let memberUIDSToFetch = channel.membersUids.filter{ !membersAlreadyFetched.contains($0) }
 
@@ -76,6 +87,39 @@ final class ChatRoomViewModel : ObservableObject {
             self.channel.members.append(contentsOf: userNode.users)
             self.getMessages()
             print("getAllChannelMembers: \(channel.members.map{ $0.username } )")
+        }
+    }
+    
+    
+    func handleTextInputArea(_ action: TextInputArea.UserAction) {
+        switch action {
+            
+        case .presentPhotoPicker:
+            showPhotoPicker = true
+        case .sendMessage:
+            sendMessage()
+        }
+    }
+    
+    private func onPhotoPickerSelection() {
+        $photoPickerItems.sink { [weak self] photoItems in
+            guard let self = self else { return }
+            
+            Task {
+                await self.parsePhotoPickerItem(photoItems)
+            }
+        }.store(in: &subscriptions)
+    }
+    
+    
+    @MainActor
+    private func parsePhotoPickerItem(_ photoPickerItems: [PhotosPickerItem]) async {
+        for photoItem in photoPickerItems {
+            guard let data = try? await photoItem.loadTransferable(type: Data.self),
+                  let uiImage = UIImage(data: data)
+            else { return }
+            
+            self.selectedPhotos.insert(uiImage, at: 0)
         }
     }
 }
