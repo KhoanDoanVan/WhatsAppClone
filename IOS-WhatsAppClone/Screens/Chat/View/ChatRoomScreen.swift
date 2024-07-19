@@ -27,12 +27,16 @@ struct ChatRoomScreen: View {
             .photosPicker(
                 isPresented: $viewModel.showPhotoPicker,
                 selection: $viewModel.photoPickerItems,
-                maxSelectionCount: 6
+                maxSelectionCount: 6,
+                photoLibrary: .shared() /// need properties for get id for each of the photopicker library
             )
+            .ignoresSafeArea(edges: .bottom)
             .navigationBarTitleDisplayMode(.inline)
             .safeAreaInset(edge: .bottom) {
                 bottomSafeAreaView()
+                    .background(Color.whatsAppWhite)
             }
+            .animation(.easeInOut, value: viewModel.showPhotoPickerPreview)
             .fullScreenCover(isPresented: $viewModel.videoPlayerState.show) {
                 if let player = viewModel.videoPlayerState.player {
                     MediaPlayerView(player: player) {
@@ -47,7 +51,7 @@ struct ChatRoomScreen: View {
         VStack(spacing: 0) {
             Divider()
             if viewModel.showPhotoPickerPreview {
-                MediaAttachmentPreview(mediaAttachment: viewModel.mediaAttachment) { actionUser in
+                MediaAttachmentPreview(mediaAttachment: viewModel.mediaAttachments) { actionUser in
                     viewModel.handleMediaAttachmentPreview(actionUser)
                 }
                 Divider()
