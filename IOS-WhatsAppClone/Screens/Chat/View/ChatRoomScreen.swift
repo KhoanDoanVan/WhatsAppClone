@@ -33,13 +33,23 @@ struct ChatRoomScreen: View {
             .safeAreaInset(edge: .bottom) {
                 bottomSafeAreaView()
             }
+            .fullScreenCover(isPresented: $viewModel.videoPlayerState.show) {
+                if let player = viewModel.videoPlayerState.player {
+                    MediaPlayerView(player: player) {
+                        viewModel.dismissMediaPlayer()
+                    }
+                }
+            }
+        
     }
     
     private func bottomSafeAreaView() -> some View {
         VStack(spacing: 0) {
             Divider()
             if viewModel.showPhotoPickerPreview {
-                MediaAttachmentPreview(mediaAttachment: viewModel.mediaAttachment)
+                MediaAttachmentPreview(mediaAttachment: viewModel.mediaAttachment) { actionUser in
+                    viewModel.handleMediaAttachmentPreview(actionUser)
+                }
                 Divider()
             }
             TextInputArea(textMessage: $viewModel.textMessage) { action in 
