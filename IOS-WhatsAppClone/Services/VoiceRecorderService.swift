@@ -14,10 +14,17 @@ import Combine
 final class VoiceRecorderService {
     
     private var audioRecorder: AVAudioRecorder?
-    private(set) var isRecording = false
-    private var elaspedTime: TimeInterval = 0
+    @Published private(set) var isRecording = false /// default (set, get) is private
+    @Published private(set) var elaspedTime: TimeInterval = 0
     private var startTime: Date?
     private var timer: AnyCancellable?
+    
+    // MARK: - Deinit
+    deinit {
+        tearDown()
+        print("VoiceRecorderService has been deinited")
+    }
+    
     
     /// Start recording
     func startRecording() {
@@ -93,6 +100,9 @@ final class VoiceRecorderService {
     
     /// Destroy
     func tearDown() {
+        if isRecording {
+            stopRecording()
+        }
         let fileManager = FileManager.default
         let folder = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
         let folderContents = try! fileManager.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil)
@@ -109,7 +119,7 @@ final class VoiceRecorderService {
     }
     
     /// Remove a record
-    private func deleteRecording(at fileURL: URL) {
+    func deleteRecording(at fileURL: URL) {
         do {
             try FileManager.default.removeItem(at: fileURL)
             print("Audio File was deleted at \(fileURL)")
@@ -125,7 +135,7 @@ final class VoiceRecorderService {
             .sink { [weak self] _ in
                 guard let startTime = self?.startTime else { return }
                 self?.elaspedTime = Date().timeIntervalSince(startTime)
-                print("VoiceRecorderService elasptime: \(self?.elaspedTime)")
+                print("VoiceRecorderService elasptime: \(String(describing: self?.elaspedTime))")
             }
     }
 }

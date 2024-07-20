@@ -18,6 +18,8 @@ final class ChatRoomViewModel : ObservableObject {
     @Published var photoPickerItems: [PhotosPickerItem] = []
     @Published var mediaAttachments: [MediaAttachment] = []
     @Published var videoPlayerState: (show: Bool, player: AVPlayer?) = (false, nil)
+    @Published var isRecordingVoiceMessage = false
+    @Published var elaspedVoiceMessageTime: TimeInterval = 0
     
     
     private(set) var channel: ChannelItem // get set the propertise has been private in this class
@@ -25,7 +27,7 @@ final class ChatRoomViewModel : ObservableObject {
     private var subscriptions = Set<AnyCancellable>()
     
     /// Voice recorder Service
-    private let voiceRecorderSerice = VoiceRecorderService()
+    private let voiceRecorderService = VoiceRecorderService()
     
     var showPhotoPickerPreview: Bool {
         return !mediaAttachments.isEmpty || !photoPickerItems.isEmpty
@@ -35,12 +37,16 @@ final class ChatRoomViewModel : ObservableObject {
         self.channel = channel
         listenToAuthState()
         onPhotoPickerSelection()
+        setUpVoiceRecorderListeners()
     }
     
     deinit {
         subscriptions.forEach { $0.cancel() }
         subscriptions.removeAll()
         currentUser = nil
+        
+        // if u back that view while using recording, it will be removed that file recording
+        voiceRecorderService.tearDown()
     }
     
     // fetch current user
@@ -64,6 +70,22 @@ final class ChatRoomViewModel : ObservableObject {
                             break
                     }
             }.store(in: &subscriptions)
+    }
+    
+    private func setUpVoiceRecorderListeners() {
+        voiceRecorderService.$isRecording
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] isRecording in
+                self?.isRecordingVoiceMessage = isRecording
+            }
+            .store(in: &subscriptions)
+        
+        voiceRecorderService.$elaspedTime
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] elaspedTime in
+                self?.elaspedVoiceMessageTime = elaspedTime
+            }
+            .store(in: &subscriptions)
     }
     
     func sendMessage() {
@@ -107,28 +129,30 @@ final class ChatRoomViewModel : ObservableObject {
     
     /// Toggle Audio Record
     private func toggleAudioRecorder() {
-        if voiceRecorderSerice.isRecording {
+        if voiceRecorderService.isRecording {
             /// stop record
-            voiceRecorderSerice.stopRecording { [weak self] audioURL, audioDuration in
+            voiceRecorderService.stopRecording { [weak self] audioURL, audioDuration in
                 self?.createAudioAttachment(from: audioURL, audioDuration)
             }
         } else {
             /// start record
-            voiceRecorderSerice.startRecording()
+            voiceRecorderService.startRecording()
         }
     }
     
     private func createAudioAttachment(from audioURL: URL?, _ audioDuration: TimeInterval) {
         guard let audioURL = audioURL else { return }
         let id = UUID().uuidString
-        let audioAttachment = MediaAttachment(id: id, type: .audio)
+        let audioAttachment = MediaAttachment(id: id, type: .audio(audioURL, audioDuration))
         mediaAttachments.insert(audioAttachment, at: 0)
     }
     
     private func onPhotoPickerSelection() {
         $photoPickerItems.sink { [weak self] photoItems in
             guard let self = self else { return }
-            self.mediaAttachments.removeAll()
+//            self.mediaAttachments.removeAll()
+            let audioRecordings = mediaAttachments.filter({ $0.type == .audio(.stubURL, .stubTimeInterval) })
+            self.mediaAttachments = audioRecordings
             Task {
                 await self.parsePhotoPickerItem(photoItems)
             }
@@ -180,6 +204,10 @@ final class ChatRoomViewModel : ObservableObject {
             showMediaPlayer(fileURL)
         case .remove(let attachment):
             remove(attachment)
+            guard let fileURL = attachment.fileURL else { return }
+            if attachment.type == .audio(.stubURL, .stubTimeInterval) {
+                voiceRecorderService.deleteRecording(at: fileURL)
+            }
         }
     }
     

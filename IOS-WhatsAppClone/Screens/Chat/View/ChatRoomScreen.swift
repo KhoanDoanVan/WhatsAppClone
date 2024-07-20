@@ -56,7 +56,12 @@ struct ChatRoomScreen: View {
                 }
                 Divider()
             }
-            TextInputArea(textMessage: $viewModel.textMessage) { action in 
+            
+            TextInputArea(
+                textMessage: $viewModel.textMessage,
+                isRecording: $viewModel.isRecordingVoiceMessage,
+                elapsedTime: $viewModel.elaspedVoiceMessageTime
+            ) { action in
                 viewModel.handleTextInputArea(action)
             }
         }
