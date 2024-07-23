@@ -20,6 +20,7 @@ final class ChatRoomViewModel : ObservableObject {
     @Published var videoPlayerState: (show: Bool, player: AVPlayer?) = (false, nil)
     @Published var isRecordingVoiceMessage = false
     @Published var elaspedVoiceMessageTime: TimeInterval = 0
+    @Published var scrollToBottomRequest: (scroll: Bool, isAnimate: Bool) = (false, false)
     
     
     private(set) var channel: ChannelItem // get set the propertise has been private in this class
@@ -100,7 +101,15 @@ final class ChatRoomViewModel : ObservableObject {
             }
         } else {
             sendMultipleMediaMessages(textMessage, attachments: mediaAttachments)
+            clearInputArea()
         }
+    }
+    
+    func clearInputArea() {
+        mediaAttachments.removeAll()
+        photoPickerItems.removeAll()
+        textMessage = ""
+        UIApplication.dismissKeyboard()
     }
     
     private func sendMultipleMediaMessages(_ text: String, attachments: [MediaAttachment]) {
@@ -131,11 +140,16 @@ final class ChatRoomViewModel : ObservableObject {
                 sender: currentUser
             )
             
-            MessageService.sendMediaMessage(to: channel, params: uploadParams) {
-                
+            MessageService.sendMediaMessage(to: channel, params: uploadParams) { [weak self] in
+                self?.scrollToBottom(isAnimated: true)
             }
         }
 
+    }
+    
+    private func scrollToBottom(isAnimated: Bool) {
+        scrollToBottomRequest.scroll = true
+        scrollToBottomRequest.isAnimate = isAnimated
     }
     
     private func uploadImageToStorage(_ attachment: MediaAttachment, completion: @escaping(_ imageURL: URL) -> Void) {

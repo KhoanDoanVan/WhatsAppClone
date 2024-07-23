@@ -11,6 +11,8 @@
 		463BBE612C3F8F0400936277 /* ChannelTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */; };
 		463BBE652C40CC6F00936277 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE642C40CC6F00936277 /* String+Extensions.swift */; };
 		463BBE672C40E92900936277 /* MessageItems+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE662C40E92900936277 /* MessageItems+Types.swift */; };
+		464604612C4F552500542CBD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464604602C4F552500542CBD /* UIApplication+Extensions.swift */; };
+		464604632C4F57E000542CBD /* UIWindowScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464604622C4F57E000542CBD /* UIWindowScene+Extensions.swift */; };
 		464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464E7C852C39642B0069A1C8 /* SignUpScreen.swift */; };
 		466094732C382D0C008B0F9A /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466094722C382D0C008B0F9A /* AuthButton.swift */; };
 		466291612C38003D00E0BF59 /* BubbleAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291602C38003D00E0BF59 /* BubbleAudioView.swift */; };
@@ -98,6 +100,8 @@
 		463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTabViewModel.swift; sourceTree = "<group>"; };
 		463BBE642C40CC6F00936277 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		463BBE662C40E92900936277 /* MessageItems+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MessageItems+Types.swift"; sourceTree = "<group>"; };
+		464604602C4F552500542CBD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
+		464604622C4F57E000542CBD /* UIWindowScene+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+Extensions.swift"; sourceTree = "<group>"; };
 		464E7C852C39642B0069A1C8 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
 		466094722C382D0C008B0F9A /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		466291602C38003D00E0BF59 /* BubbleAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleAudioView.swift; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 				466CDE512C4952C700E51646 /* PhotosPickerItem+Extensions.swift */,
 				466CDE552C49632E00E51646 /* URL+Extensions.swift */,
 				466CDE672C4BA4C100E51646 /* TimeInterval+Extensions.swift */,
+				464604602C4F552500542CBD /* UIApplication+Extensions.swift */,
+				464604622C4F57E000542CBD /* UIWindowScene+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -694,6 +700,7 @@
 			files = (
 				466CDE6A2C4CA8BD00E51646 /* FirebaseHelper.swift in Sources */,
 				46E4F46F2C32F4E800A48C32 /* UpdatesTabScreen.swift in Sources */,
+				464604612C4F552500542CBD /* UIApplication+Extensions.swift in Sources */,
 				46638CE52C39674100B93132 /* AuthScreenModel.swift in Sources */,
 				46F377F32C3A341F00B9567D /* RootScreenModel.swift in Sources */,
 				467439A42C43B9AD000F37FE /* CircularProfileImageView.swift in Sources */,
@@ -715,6 +722,7 @@
 				466CDE562C49632E00E51646 /* URL+Extensions.swift in Sources */,
 				46E4F48F2C3505DC00A48C32 /* TextInputArea.swift in Sources */,
 				46E4F49A2C364BF400A48C32 /* BubbleTailView.swift in Sources */,
+				464604632C4F57E000542CBD /* UIWindowScene+Extensions.swift in Sources */,
 				468C1A6C2C428D8F00C5F66D /* MessageService.swift in Sources */,
 				46F377F12C3A340000B9567D /* RootScreen.swift in Sources */,
 				468C1A6A2C428C3900C5F66D /* ChatRoomViewModel.swift in Sources */,
