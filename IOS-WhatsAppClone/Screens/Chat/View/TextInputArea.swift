@@ -11,12 +11,13 @@ struct TextInputArea: View {
     @Binding var textMessage: String
     @Binding var isRecording: Bool
     @Binding var elapsedTime: TimeInterval
-    
-    let actionHandler: (_ action: UserAction) -> Void
     @State private var isPulsing = false
     
-    private var disableSendButton: Bool {
-        return textMessage.isEmptyOrWhiteSpace || isRecording
+    var disableSendButton: Bool
+    let actionHandler: (_ action: UserAction) -> Void
+    
+    private var isSendButtonDisable: Bool {
+        return disableSendButton || isRecording
     }
     
     var body: some View {
@@ -147,7 +148,7 @@ extension TextInputArea {
 }
 
 #Preview {
-    TextInputArea(textMessage: .constant(""), isRecording: .constant(false), elapsedTime: .constant(0)) { action in
+    TextInputArea(textMessage: .constant(""), isRecording: .constant(false), elapsedTime: .constant(0), disableSendButton: false) { action in
         
     }
 }

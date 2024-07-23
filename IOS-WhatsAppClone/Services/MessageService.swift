@@ -10,6 +10,7 @@ import Foundation
 // MARK: Handles sending and fetching messages and settings reactions
 struct MessageService {
     
+    // Send Message With Text
     static func sendTextMessages(
         to channel: ChannelItem,
         from currentUser: UserItem,
@@ -38,6 +39,38 @@ struct MessageService {
         onComplete()
     }
     
+    // Send Message with Text and Media (audio, image, video)
+    static func sendMediaMessage(
+        to channel: ChannelItem,
+        params: MessageUploadParams,
+        completion: @escaping () -> Void
+    ) {
+        guard let messageId = FirebaseConstants.MessagesRef.childByAutoId().key else { return }
+        let timeStamp = Date().timeIntervalSince1970
+        
+        let channelDict: [String: Any] = [
+            .lastMessage: params.text,
+            .lastMessageTimeStamp: timeStamp,
+            .lastMessageType: params.type.title
+        ]
+        
+        var messageDict: [String: Any] = [
+            .text: params.text,
+            .type: params.type.title,
+            .timeStamp: timeStamp,
+            .ownerUid: params.ownerUid,
+        ]
+        
+        messageDict[.thumbnailUrl] = params.thumbnailURL ?? nil
+        messageDict[.thumbnailWidth] = params.thumbnailWidth ?? nil
+        messageDict[.thumbnailHeight] = params.thumbnailHeight ?? nil
+        
+        FirebaseConstants.ChannelsRef.child(channel.id).updateChildValues(channelDict)
+        FirebaseConstants.MessagesRef.child(channel.id).child(messageId).setValue(messageDict)
+        
+        completion()
+    }
+    
     static func getMessages(for channel: ChannelItem, completion: @escaping ([MessageItem]) -> Void) {
         FirebaseConstants.MessagesRef.child(channel.id).observe(.value) { snapshot in
             guard let dict = snapshot.value as? [String: Any] else { return }
@@ -64,9 +97,23 @@ struct MessageUploadParams {
     let text: String
     let type: MessageType
     let attachment: MediaAttachment
-    var thumbnail: String?
+    var thumbnailURL: String?
     var videoURL: String?
     var sender: UserItem
     var audioURL: String?
     var audioDuration: TimeInterval?
+    
+    var ownerUid: String {
+        return sender.uid
+    }
+    
+    var thumbnailWidth: CGFloat? {
+        guard type == .photo || type == .video else { return nil }
+        return attachment.thumbnail.size.width
+    }
+    
+    var thumbnailHeight: CGFloat? {
+        guard type == .photo || type == .video else { return nil }
+        return attachment.thumbnail.size.height
+    }
 }

@@ -32,6 +32,10 @@ final class ChatRoomViewModel : ObservableObject {
     var showPhotoPickerPreview: Bool {
         return !mediaAttachments.isEmpty || !photoPickerItems.isEmpty
     }
+
+    var disableSendButton: Bool {
+        return mediaAttachments.isEmpty && textMessage.isEmptyOrWhiteSpace
+    }
     
     init(_ channel: ChannelItem) {
         self.channel = channel
@@ -90,8 +94,61 @@ final class ChatRoomViewModel : ObservableObject {
     
     func sendMessage() {
         guard let currentUser else { return }
-        MessageService.sendTextMessages(to: channel, from: currentUser, textMessage) { [weak self] in
-            self?.textMessage = ""
+        if mediaAttachments.isEmpty {
+            MessageService.sendTextMessages(to: channel, from: currentUser, textMessage) { [weak self] in
+                self?.textMessage = ""
+            }
+        } else {
+            sendMultipleMediaMessages(textMessage, attachments: mediaAttachments)
+        }
+    }
+    
+    private func sendMultipleMediaMessages(_ text: String, attachments: [MediaAttachment]) {
+        mediaAttachments.forEach { attachment in
+            switch attachment.type {
+            case .photo:
+                sendPhotoMessage(text: text, attachment)
+            case .video:
+                break
+            case .audio:
+                break
+            }
+        }
+    }
+    
+    private func sendPhotoMessage(text: String, _ attachment: MediaAttachment) {
+        /// upload the image to storage bucket
+        uploadImageToStorage(attachment) {[weak self] imageURL in
+            
+            guard let self = self, let currentUser else { return }
+            
+            let uploadParams = MessageUploadParams(
+                channel: channel,
+                text: text,
+                type: .photo,
+                attachment: attachment,
+                thumbnailURL: imageURL.absoluteString,
+                sender: currentUser
+            )
+            
+            MessageService.sendMediaMessage(to: channel, params: uploadParams) {
+                
+            }
+        }
+
+    }
+    
+    private func uploadImageToStorage(_ attachment: MediaAttachment, completion: @escaping(_ imageURL: URL) -> Void) {
+        FirebaseHelper.uploadImage(attachment.thumbnail, for: .photoMessage) { result in
+            switch result {
+                
+            case .success(let imageURL):
+                completion(imageURL)
+            case .failure(let error):
+                print("Failed to upload Image to Storage: \(error.localizedDescription)")
+            }
+        } progressHandler: { progress in
+            print("UPLOAD IMAGE PROGRESS: \(progress)")
         }
     }
 
