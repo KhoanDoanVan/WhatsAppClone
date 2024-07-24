@@ -61,9 +61,11 @@ struct MessageService {
             .ownerUid: params.ownerUid,
         ]
         
+        // Message Photo & Video
         messageDict[.thumbnailUrl] = params.thumbnailURL ?? nil
         messageDict[.thumbnailWidth] = params.thumbnailWidth ?? nil
         messageDict[.thumbnailHeight] = params.thumbnailHeight ?? nil
+        messageDict[.videoURL] = params.videoURL ?? nil
         
         FirebaseConstants.ChannelsRef.child(channel.id).updateChildValues(channelDict)
         FirebaseConstants.MessagesRef.child(channel.id).child(messageId).setValue(messageDict)

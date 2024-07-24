@@ -42,6 +42,7 @@ final class MessageListController: UIViewController {
     private let viewModel: ChatRoomViewModel
     private let cellIdentifier = "MessageListControllerCells"
     private var subscriptions = Set<AnyCancellable>()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.delegate = self
@@ -56,6 +57,7 @@ final class MessageListController: UIViewController {
         
         return tableView
     }()
+    
     private let backgroundImageView: UIImageView = {
         let backgroundImageView = UIImageView(image: .chatbackground)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -142,6 +144,23 @@ extension MessageListController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    // Click to message for play video type
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
+        let messageItem = viewModel.messages[indexPath.row]
+        
+        switch messageItem.type {
+        case .video:
+            guard let videoURLString = messageItem.videoURL,
+                  let videoURL = URL(string: videoURLString)
+            else { return }
+            viewModel.showMediaPlayer(videoURL)
+        default:
+            break
+        }
     }
 }
 
