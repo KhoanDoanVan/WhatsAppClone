@@ -62,6 +62,7 @@ final class MessageListController: UIViewController {
         let backgroundImageView = UIImageView(image: .chatbackground)
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         return backgroundImageView
+        
     }()
     
     // MARK: Methods
@@ -152,12 +153,20 @@ extension MessageListController: UITableViewDelegate, UITableViewDataSource {
         UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
         let messageItem = viewModel.messages[indexPath.row]
         
+        // Show media player
         switch messageItem.type {
         case .video:
             guard let videoURLString = messageItem.videoURL,
                   let videoURL = URL(string: videoURLString)
             else { return }
             viewModel.showMediaPlayer(videoURL)
+            
+        case .audio:
+            guard let audioUrlString = messageItem.audioURL,
+                  let audioURL = URL(string: audioUrlString)
+            else { return }
+            viewModel.showMediaPlayer(audioURL)
+            
         default:
             break
         }
