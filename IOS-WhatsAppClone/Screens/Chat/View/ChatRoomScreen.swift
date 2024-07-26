@@ -11,6 +11,7 @@ import PhotosUI
 struct ChatRoomScreen: View {
     let channel: ChannelItem
     @StateObject private var viewModel: ChatRoomViewModel
+    @StateObject private var voiceMessagePlayer = VoiceMessagePlayer()
     
     init(channel: ChannelItem) {
         self.channel = channel
@@ -44,7 +45,7 @@ struct ChatRoomScreen: View {
                     }
                 }
             }
-        
+            .environmentObject(voiceMessagePlayer) /// shared data object that can be accessed by any child view
     }
     
     private func bottomSafeAreaView() -> some View {

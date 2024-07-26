@@ -11,11 +11,11 @@ import AVFoundation
 final class VoiceMessagePlayer: ObservableObject {
     
     private var player: AVPlayer?
-    private var currentURL: URL?
+    private(set) var currentURL: URL?
     
-    private var playerItem: AVPlayerItem?
-    private var playbackState = PlaybackState.stopped
-    private var currentTime = CMTime.zero
+    @Published private(set) var playerItem: AVPlayerItem?
+    @Published private(set) var playbackState = PlaybackState.stopped
+    @Published private(set) var currentTime = CMTime.zero
     private var currentTimeObserver: Any?
     
     deinit {
@@ -47,7 +47,7 @@ final class VoiceMessagePlayer: ObservableObject {
         playbackState = .pause
     }
     
-    // Seek Audio
+    // Seek Audio (use when dragging and moving the slider)
     func seek(to timeInterval: TimeInterval) {
         guard let player else { return }
         let targetTime = CMTime(seconds: timeInterval, preferredTimescale: 1)
@@ -111,5 +111,8 @@ final class VoiceMessagePlayer: ObservableObject {
 extension VoiceMessagePlayer {
     enum PlaybackState {
         case stopped, pause, playing
+        var icon: String {
+            return self == .playing ? "pause.fill" : "play.fill"
+        }
     }
 }

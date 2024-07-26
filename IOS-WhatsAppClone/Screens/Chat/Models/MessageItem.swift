@@ -69,6 +69,10 @@ struct MessageItem: Identifiable {
         return photoWidth
     }
     
+    var audioDurationInString: String {
+        return audioDuration?.formatElaspedTime ?? "00:00"
+    }
+    
     static let stubMessages: [MessageItem] = [
         MessageItem(id: UUID().uuidString, isGroupChat: true, text: "Hi there", type: .text, ownerUid: "3", timeStamp: Date(), thumbnailUrl: nil),
         MessageItem(id: UUID().uuidString, isGroupChat: false, text: "Check out this Photo", type: .photo, ownerUid: "4", timeStamp: Date(), thumbnailUrl: nil),
