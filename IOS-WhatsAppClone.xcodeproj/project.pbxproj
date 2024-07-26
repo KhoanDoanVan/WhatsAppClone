@@ -14,6 +14,7 @@
 		464604612C4F552500542CBD /* UIApplication+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464604602C4F552500542CBD /* UIApplication+Extensions.swift */; };
 		464604632C4F57E000542CBD /* UIWindowScene+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464604622C4F57E000542CBD /* UIWindowScene+Extensions.swift */; };
 		464E7C862C39642B0069A1C8 /* SignUpScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 464E7C852C39642B0069A1C8 /* SignUpScreen.swift */; };
+		465071082C53DF4B00645450 /* VoiceMessagePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465071072C53DF4B00645450 /* VoiceMessagePlayer.swift */; };
 		466094732C382D0C008B0F9A /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466094722C382D0C008B0F9A /* AuthButton.swift */; };
 		466291612C38003D00E0BF59 /* BubbleAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291602C38003D00E0BF59 /* BubbleAudioView.swift */; };
 		466291722C38289D00E0BF59 /* LoginScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291712C38289D00E0BF59 /* LoginScreen.swift */; };
@@ -103,6 +104,7 @@
 		464604602C4F552500542CBD /* UIApplication+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+Extensions.swift"; sourceTree = "<group>"; };
 		464604622C4F57E000542CBD /* UIWindowScene+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+Extensions.swift"; sourceTree = "<group>"; };
 		464E7C852C39642B0069A1C8 /* SignUpScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpScreen.swift; sourceTree = "<group>"; };
+		465071072C53DF4B00645450 /* VoiceMessagePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceMessagePlayer.swift; sourceTree = "<group>"; };
 		466094722C382D0C008B0F9A /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		466291602C38003D00E0BF59 /* BubbleAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleAudioView.swift; sourceTree = "<group>"; };
 		466291712C38289D00E0BF59 /* LoginScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreen.swift; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 			isa = PBXGroup;
 			children = (
 				468C1A692C428C3900C5F66D /* ChatRoomViewModel.swift */,
+				465071072C53DF4B00645450 /* VoiceMessagePlayer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */,
 				46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */,
 				468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */,
+				465071082C53DF4B00645450 /* VoiceMessagePlayer.swift in Sources */,
 				46E4F49F2C369C5200A48C32 /* BubbleImageView.swift in Sources */,
 				4688D15C2C3CE95A008CCB99 /* NewGroupSetupScreen.swift in Sources */,
 				46E4F4932C36454900A48C32 /* MessageListView.swift in Sources */,
