@@ -55,6 +55,9 @@ final class VoiceRecorderService {
             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
         ]
         
+        /// Haptic
+        generateHapticFeedback()
+        
         /// Start Record
         do {
             audioRecorder = try AVAudioRecorder(url: audioFileURL, settings: settings)
@@ -86,6 +89,9 @@ final class VoiceRecorderService {
         
         /// reset elaspedTime
         elaspedTime = 0
+        
+        /// Haptic
+        generateHapticFeedback()
         
         let audioSession = AVAudioSession.sharedInstance()
         
@@ -137,5 +143,13 @@ final class VoiceRecorderService {
                 self?.elaspedTime = Date().timeIntervalSince(startTime)
                 print("VoiceRecorderService elasptime: \(String(describing: self?.elaspedTime))")
             }
+    }
+    
+    /// Tegration haptic sound and vibration when just click the record
+    private func generateHapticFeedback() {
+        let systemSoundID: SystemSoundID = 1118
+        AudioServicesPlaySystemSound(systemSoundID)
+        /// Vibration
+        Haptic.impact(.medium)
     }
 }
