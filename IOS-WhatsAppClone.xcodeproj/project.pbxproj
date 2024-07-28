@@ -41,6 +41,7 @@
 		468C1A702C43904100C5F66D /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */; };
 		468C1A732C43B92800C5F66D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 468C1A722C43B92800C5F66D /* Kingfisher */; };
 		46B804BF2C549F430091020E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B804BE2C549F430091020E /* Haptics.swift */; };
+		46B804C12C55ED1D0091020E /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B804C02C55ED1D0091020E /* BubbleView.swift */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
 		46E4F4472C32E8A500A48C32 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4462C32E8A500A48C32 /* Assets.xcassets */; };
 		46E4F44A2C32E8A500A48C32 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 46E4F4492C32E8A500A48C32 /* Preview Assets.xcassets */; };
@@ -131,6 +132,7 @@
 		468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreationTextView.swift; sourceTree = "<group>"; };
 		468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminMessageTextView.swift; sourceTree = "<group>"; };
 		46B804BE2C549F430091020E /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
+		46B804C02C55ED1D0091020E /* BubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleView.swift; sourceTree = "<group>"; };
 		46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS-WhatsAppClone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_WhatsAppCloneApp.swift; sourceTree = "<group>"; };
 		46E4F4462C32E8A500A48C32 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				46E4F48C2C3503D800A48C32 /* ChatRoomScreen.swift */,
 				46E4F4922C36454900A48C32 /* MessageListView.swift */,
 				46E4F4902C36415B00A48C32 /* MessageListController.swift */,
+				46B804C02C55ED1D0091020E /* BubbleView.swift */,
 				468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */,
 				468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */,
 				46E4F48E2C3505DC00A48C32 /* TextInputArea.swift */,
@@ -729,6 +732,7 @@
 				466CDE562C49632E00E51646 /* URL+Extensions.swift in Sources */,
 				46E4F48F2C3505DC00A48C32 /* TextInputArea.swift in Sources */,
 				46E4F49A2C364BF400A48C32 /* BubbleTailView.swift in Sources */,
+				46B804C12C55ED1D0091020E /* BubbleView.swift in Sources */,
 				464604632C4F57E000542CBD /* UIWindowScene+Extensions.swift in Sources */,
 				468C1A6C2C428D8F00C5F66D /* MessageService.swift in Sources */,
 				46F377F12C3A340000B9567D /* RootScreen.swift in Sources */,

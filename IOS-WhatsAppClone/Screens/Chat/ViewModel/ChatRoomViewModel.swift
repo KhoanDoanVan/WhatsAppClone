@@ -289,7 +289,7 @@ final class ChatRoomViewModel : ObservableObject {
     private func onPhotoPickerSelection() {
         $photoPickerItems.sink { [weak self] photoItems in
             guard let self = self else { return }
-//            self.mediaAttachments.removeAll()
+            // self.mediaAttachments.removeAll()
             let audioRecordings = mediaAttachments.filter({ $0.type == .audio(.stubURL, .stubTimeInterval) })
             self.mediaAttachments = audioRecordings
             Task {
@@ -356,5 +356,12 @@ final class ChatRoomViewModel : ObservableObject {
         
         guard let photoPickerIndex = photoPickerItems.firstIndex(where: { $0.itemIdentifier == attachment.id }) else { return }
         photoPickerItems.remove(at: photoPickerIndex)
+    }
+    
+    // Check the newDay display or not
+    func isNewDay(for message: MessageItem, at index: Int) -> Bool {
+        let priorIndex = max(0, (index - 1))
+        let priorMessage = messages[priorIndex]
+        return !message.timeStamp.isSameDay(as: priorMessage.timeStamp)
     }
 }

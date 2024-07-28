@@ -153,28 +153,11 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
         cell.backgroundColor = .clear
         
         let message = viewModel.messages[indexPath.item]
+        let isNewDay = viewModel.isNewDay(for: message, at: indexPath.item)
         
         /// UIHostingConfiguration is a part of UIKit that allows you to integrate SwiftUI views within a UITableViewCell or UICollectionViewCell. This makes it easier to use SwiftUI's declarative syntax and modern UI features within a UIKit-based project..
         cell.contentConfiguration = UIHostingConfiguration {
-            switch message.type {
-            case .text:
-                BubbleTextView(item: message)
-            case .video,.photo:
-                BubbleImageView(item: message)
-            case .audio:
-                BubbleAudioView(item: message)
-            case .admin(let adminType):
-                switch adminType {
-                case .channelCreation:
-                    ChannelCreationTextView()
-                    
-                    if viewModel.channel.isGroupChat {
-                        AdminMessageTextView(channel: viewModel.channel)
-                    }
-                default:
-                    Text("Unknown")
-                }
-            }
+            BubbleView(message: message, channel: viewModel.channel, isNewDay: isNewDay)
         }
         return cell
     }

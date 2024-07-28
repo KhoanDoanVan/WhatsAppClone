@@ -50,4 +50,34 @@ extension Date {
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
+    
+    
+    /// Relative time of message
+    var relativeDateString: String {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(self) {
+            return "Today"
+        } else if calendar.isDateInYesterday(self) {
+            return "Yesterday"
+        } else if isCurrentWeek {
+            return toString(format: "EEEE") // Monday, Tuesday
+        } else if isCurrentYear {
+            return toString(format: "E, MMM d") // Mon, Feb 19
+        } else {
+            return toString(format: "MMM dd, YYYY") // Mon, Feb 19, 2020
+        }
+    }
+    
+    private var isCurrentWeek: Bool {
+        return Calendar.current.isDate(self, equalTo: Date(), toGranularity: .weekday)
+    }
+    
+    private var isCurrentYear: Bool {
+        return Calendar.current.isDate(self, equalTo: Date(), toGranularity: .year)
+    }
+    
+    func isSameDay(as otherDate: Date) -> Bool {
+        let calendar = Calendar.current
+        return calendar.isDate(self, inSameDayAs: otherDate)
+    }
 }
