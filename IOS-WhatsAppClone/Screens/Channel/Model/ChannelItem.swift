@@ -11,7 +11,7 @@ import Firebase
 struct ChannelItem: Identifiable, Hashable {
     var id: String
     var name: String?
-    var lastMessage: String
+    private var lastMessage: String
     var creationDate: Date
     var lastMessageTimestamp: Date
     var membersCount: Int
@@ -20,6 +20,7 @@ struct ChannelItem: Identifiable, Hashable {
     var members: [UserItem]
     private var thumbnailUrl: String?
     var createdBy: String
+    let lastMessageType: MessageType
     
     var isGroupChat: Bool {
         return membersCount > 2
@@ -66,6 +67,21 @@ struct ChannelItem: Identifiable, Hashable {
         return members.count == membersCount
     }
     
+    var previewMessages: String {
+        switch lastMessageType {
+        case .admin:
+            return "Newly Created Chat!"
+        case .text:
+            return lastMessage
+        case .photo:
+            return "Photo Message"
+        case .video:
+            return "Video Message"
+        case .audio:
+            return "Voice Message"
+        }
+    }
+    
     private var groupMemberNames: String {
         let membersCount = membersCount - 1
         let fullNames: [String] = membersExcludingMe.map{ $0.username }
@@ -82,7 +98,7 @@ struct ChannelItem: Identifiable, Hashable {
         return "Unknown"
     }
     
-    static let placeholder = ChannelItem.init(id: "1", lastMessage: "Hello world", creationDate: Date(), lastMessageTimestamp: Date(), membersCount: 2, adminUids: [], membersUids: [], members: [], createdBy: "")
+    static let placeholder = ChannelItem.init(id: "1", lastMessage: "Hello world", creationDate: Date(), lastMessageTimestamp: Date(), membersCount: 2, adminUids: [], membersUids: [], members: [], createdBy: "", lastMessageType: .text)
 }
 
 extension ChannelItem {
@@ -100,6 +116,8 @@ extension ChannelItem {
         self.membersUids = dict[.membersUids] as? [String] ?? []
         self.members = dict[.members] as? [UserItem] ?? []
         self.createdBy = dict[.createdBy] as? String ?? ""
+        let msfTypeValue = dict[.lastMessageType] as? String ?? "text"
+        self.lastMessageType = MessageType(msfTypeValue) ?? .text
     }
 }
 

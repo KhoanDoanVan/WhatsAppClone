@@ -154,10 +154,11 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
         
         let message = viewModel.messages[indexPath.item]
         let isNewDay = viewModel.isNewDay(for: message, at: indexPath.item)
+        let showSenderName = viewModel.showSenderName(for: message, at: indexPath.item)
         
         /// UIHostingConfiguration is a part of UIKit that allows you to integrate SwiftUI views within a UITableViewCell or UICollectionViewCell. This makes it easier to use SwiftUI's declarative syntax and modern UI features within a UIKit-based project..
         cell.contentConfiguration = UIHostingConfiguration {
-            BubbleView(message: message, channel: viewModel.channel, isNewDay: isNewDay)
+            BubbleView(message: message, channel: viewModel.channel, isNewDay: isNewDay, showSenderName: showSenderName)
         }
         return cell
     }
