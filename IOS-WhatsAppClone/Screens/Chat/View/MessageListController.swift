@@ -42,6 +42,7 @@ final class MessageListController: UIViewController {
     private let viewModel: ChatRoomViewModel
     private let cellIdentifier = "MessageListControllerCells"
     private var subscriptions = Set<AnyCancellable>()
+    private var lastScrollPosition: String?
     
     // UIKIT
     private lazy var pullToRefresh: UIRefreshControl = {
@@ -121,12 +122,14 @@ final class MessageListController: UIViewController {
     
     private func setUpMessagesListeners() {
         let delay = 200
+        // messages
         viewModel.$messages
             .debounce(for: .milliseconds(delay), scheduler: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.messagesCollectionView.reloadData()
             }.store(in: &subscriptions)
         
+        // scroll to bottom
         viewModel.$scrollToBottomRequest
             .debounce(for: .milliseconds(delay), scheduler: DispatchQueue.main)
             .sink { [weak self] scrollRequest in
@@ -134,10 +137,28 @@ final class MessageListController: UIViewController {
                     self?.messagesCollectionView.scrollToLastItem(at: .bottom, animated: scrollRequest.isAnimate)
                 }
             }.store(in: &subscriptions)
+        
+        // is paginating, i wanna know when we are done paginating and then i want to scroll to the first item that we were at before we pull to refresh
+        viewModel.$isPaginating
+            .debounce(for: .milliseconds(delay), scheduler: DispatchQueue.main)
+            .sink {[weak self] isPaginating in
+                guard let self = self, let lastScrollPosition else { return }
+                if isPaginating == false {
+                    guard let index = viewModel.messages.firstIndex(where: {
+                        $0.id == lastScrollPosition
+                    }) else { return }
+                    let indexPath = IndexPath(item: index, section: 0)
+                    self.messagesCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+                    self.pullToRefresh.endRefreshing()
+                }
+            }.store(in: &subscriptions)
     }
     
+    // Get more Messages
     @objc private func refreshData() {
-        messagesCollectionView.refreshControl?.endRefreshing()
+        // The lastScrollPosition use for flag the last position of the array messages (when use fetch more data, the view will auto scroll to the bottom of the char room screen) and its will to fix that
+        lastScrollPosition = viewModel.messages.first?.id
+        viewModel.getMessages()
     }
 }
 

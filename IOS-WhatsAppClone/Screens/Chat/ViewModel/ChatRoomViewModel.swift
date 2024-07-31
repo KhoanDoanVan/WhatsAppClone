@@ -21,6 +21,9 @@ final class ChatRoomViewModel : ObservableObject {
     @Published var isRecordingVoiceMessage = false
     @Published var elaspedVoiceMessageTime: TimeInterval = 0
     @Published var scrollToBottomRequest: (scroll: Bool, isAnimate: Bool) = (false, false)
+    @Published var isPaginating = false
+    
+    private var currentPage: String?
     
     
     private(set) var channel: ChannelItem // get set the propertise has been private in this class
@@ -233,11 +236,19 @@ final class ChatRoomViewModel : ObservableObject {
 
     }
 
-    private func getMessages() {
-        MessageService.getMessages(for: channel) {[weak self] messages in
-            self?.messages = messages
+    func getMessages() {
+        // MessageService.getMessages(for: channel) {[weak self] messages in
+        // self?.messages = messages
+        // self?.scrollToBottom(isAnimated: false)
+        // print("messages: \(messages.map { $0.text })")
+        // }
+        
+        isPaginating = currentPage != nil
+        MessageService.getHistoricalMessages(for: channel, lastCursor: currentPage, pageSize: 12) { [weak self] messageNode in
+            self?.messages.insert(contentsOf: messageNode.messages, at: 0)
+            self?.currentPage = messageNode.currentCursor
             self?.scrollToBottom(isAnimated: false)
-            print("messages: \(messages.map { $0.text })")
+            self?.isPaginating = false
         }
     }
     
