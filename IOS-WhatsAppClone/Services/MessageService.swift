@@ -119,8 +119,6 @@ struct MessageService {
                 .queryLimited(toLast: pageSize)
         }
         
-//        let query = FirebaseConstants.MessagesRef.child(channel.id).queryLimited(toLast: pageSize)
-        
         query.observeSingleEvent(of: .value) { mainSnapshot in
             guard let first = mainSnapshot.children.allObjects.first as? DataSnapshot,
                   let allObjects = mainSnapshot.children.allObjects as? [DataSnapshot]
@@ -146,11 +144,38 @@ struct MessageService {
             }
             
         } withCancel: { error in
-            print("Failed tp get messages for channel: \(channel.name)")
+            print("Failed to get messages for channel: \(channel.name ?? "")")
             completion(.emptyNode)
         }
     }
     
+    static func getFirstMessage(in channel: ChannelItem, completion: @escaping(MessageItem) -> Void) {
+        FirebaseConstants.MessagesRef.child(channel.id)
+            .queryLimited(toFirst: 1)
+            .observeSingleEvent(of: .value) { snapshot in
+                guard let dictionary = snapshot.value as? [String:Any] else { return }
+                dictionary.forEach { key, value in
+                    guard let messageDict = snapshot.value as? [String:Any] else { return }
+                    var firstMessage = MessageItem(id: key, isGroupChat: channel.isGroupChat, dict: messageDict)
+                    var messageSender = channel.members.first(where: { $0.uid == firstMessage.ownerUid })
+                    firstMessage.sender = messageSender
+                    completion(firstMessage)
+                }
+            } withCancel: { error in
+                print("Failed to get first message for channel: \(channel.name ?? "")")
+            }
+    }
+    
+    static func listenForNewMessages(in channel: ChannelItem, completion: @escaping(MessageItem) -> Void) {
+        FirebaseConstants.MessagesRef.child(channel.id)
+            .observe(.childAdded) { snapshot in
+                guard let messageDict = snapshot.value as? [String:Any] else { return }
+                var newMessage = MessageItem(id: snapshot.key, isGroupChat: channel.isGroupChat, dict: messageDict)
+                let messageSender = channel.members.first(where: { $0.uid == newMessage.ownerUid })
+                newMessage.sender = messageSender
+                completion(newMessage)
+            }
+    }
 }
 
 struct MessageNode {

@@ -100,10 +100,31 @@ final class MessageListController: UIViewController {
         
     }()
     
+    // Button Pull Down
+    private let pullToDownHUBView: UIButton = {
+        var buttonConfig = UIButton.Configuration.filled()
+        var imageConfig = UIImage.SymbolConfiguration(pointSize: 10, weight: .black)
+        
+        let image = UIImage(systemName: "arrow.up.circle.fill", withConfiguration: imageConfig)
+        buttonConfig.image = image
+        buttonConfig.baseBackgroundColor = .bubbleGreen
+        buttonConfig.baseForegroundColor = .whatsAppBlack
+        buttonConfig.imagePadding = 5
+        buttonConfig.cornerStyle = .capsule
+        
+        let font = UIFont.systemFont(ofSize: 12, weight: .black)
+        buttonConfig.attributedTitle = AttributedString("Pull Down", attributes: AttributeContainer([NSAttributedString.Key.font: font]))
+        let button = UIButton(configuration: buttonConfig)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.alpha = 0 // set opacity zero for default
+        return button
+    }()
+    
     // MARK: Methods
     private func setUpViews() {
         view.addSubview(backgroundImageView)
         view.addSubview(messagesCollectionView)
+        view.addSubview(pullToDownHUBView)
         
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -114,7 +135,10 @@ final class MessageListController: UIViewController {
             messagesCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             messagesCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             messagesCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            messagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            messagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            pullToDownHUBView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            pullToDownHUBView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         // tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
@@ -158,7 +182,7 @@ final class MessageListController: UIViewController {
     @objc private func refreshData() {
         // The lastScrollPosition use for flag the last position of the array messages (when use fetch more data, the view will auto scroll to the bottom of the char room screen) and its will to fix that
         lastScrollPosition = viewModel.messages.first?.id
-        viewModel.getMessages()
+        viewModel.paginationMoreMessages()
     }
 }
 
@@ -199,6 +223,17 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
             
         default:
             break
+        }
+    }
+    
+    // Handle scroll action (dislay button when user scroll over the contents)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            pullToDownHUBView.alpha = viewModel.isPaginatable ? 1 : 0
+            print("CollectionView is at the top: \(scrollView.contentOffset.y)")
+        } else {
+            pullToDownHUBView.alpha = 0
+            print("CollectionView is not at the top: \(scrollView.contentOffset.y)")
         }
     }
     
