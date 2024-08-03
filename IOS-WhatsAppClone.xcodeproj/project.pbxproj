@@ -22,6 +22,7 @@
 		466291762C38297D00E0BF59 /* AuthTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466291752C38297D00E0BF59 /* AuthTextField.swift */; };
 		46638CE52C39674100B93132 /* AuthScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE42C39674100B93132 /* AuthScreenModel.swift */; };
 		46638CE82C396A3A00B93132 /* AuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46638CE72C396A3A00B93132 /* AuthProvider.swift */; };
+		466B562E2C5DCEF3008A62A1 /* SettingsTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466B562D2C5DCEF3008A62A1 /* SettingsTabViewModel.swift */; };
 		466CDE522C4952C700E51646 /* PhotosPickerItem+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CDE512C4952C700E51646 /* PhotosPickerItem+Extensions.swift */; };
 		466CDE542C49574000E51646 /* MediaPickerItem_Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CDE532C49574000E51646 /* MediaPickerItem_Types.swift */; };
 		466CDE562C49632E00E51646 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466CDE552C49632E00E51646 /* URL+Extensions.swift */; };
@@ -114,6 +115,7 @@
 		466291752C38297D00E0BF59 /* AuthTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthTextField.swift; sourceTree = "<group>"; };
 		46638CE42C39674100B93132 /* AuthScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreenModel.swift; sourceTree = "<group>"; };
 		46638CE72C396A3A00B93132 /* AuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthProvider.swift; sourceTree = "<group>"; };
+		466B562D2C5DCEF3008A62A1 /* SettingsTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTabViewModel.swift; sourceTree = "<group>"; };
 		466CDE512C4952C700E51646 /* PhotosPickerItem+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotosPickerItem+Extensions.swift"; sourceTree = "<group>"; };
 		466CDE532C49574000E51646 /* MediaPickerItem_Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaPickerItem_Types.swift; sourceTree = "<group>"; };
 		466CDE552C49632E00E51646 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Extensions.swift"; sourceTree = "<group>"; };
@@ -260,6 +262,14 @@
 				46638CE72C396A3A00B93132 /* AuthProvider.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		466B562C2C5DCEC9008A62A1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				466B562D2C5DCEF3008A62A1 /* SettingsTabViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		467439A22C43B999000F37FE /* Components */ = {
@@ -421,6 +431,7 @@
 		46E4F4792C344DF000A48C32 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				466B562C2C5DCEC9008A62A1 /* ViewModel */,
 				46E4F4872C34FC4500A48C32 /* Models */,
 				46E4F4822C34FB2400A48C32 /* View */,
 			);
@@ -744,6 +755,7 @@
 				46F378092C3BE45500B9567D /* GroupChatPartnersScreen.swift in Sources */,
 				46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */,
 				46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */,
+				466B562E2C5DCEF3008A62A1 /* SettingsTabViewModel.swift in Sources */,
 				468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */,
 				465071082C53DF4B00645450 /* VoiceMessagePlayer.swift in Sources */,
 				46E4F49F2C369C5200A48C32 /* BubbleImageView.swift in Sources */,
