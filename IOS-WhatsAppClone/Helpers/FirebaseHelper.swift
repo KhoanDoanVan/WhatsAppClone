@@ -84,7 +84,7 @@ struct FirebaseHelper {
 
 extension FirebaseHelper {
     enum UploadType {
-        case profile
+        case profilePhoto
         case photoMessage
         case videoMessage
         case voiceMessage
@@ -92,8 +92,8 @@ extension FirebaseHelper {
         var filePath: StorageReference {
             let filename = UUID().uuidString
             switch self {
-            case .profile:
-                return FirebaseConstants.StorageRef.child("profile_image_urls").child(filename)
+            case .profilePhoto :
+                return FirebaseConstants.StorageRef.child("profile_photo").child(filename)
             case .photoMessage:
                 return FirebaseConstants.StorageRef.child("photo_messages").child(filename)
             case .videoMessage:

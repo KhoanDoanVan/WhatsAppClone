@@ -41,6 +41,7 @@
 		468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6D2C438ED100C5F66D /* ChannelCreationTextView.swift */; };
 		468C1A702C43904100C5F66D /* AdminMessageTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 468C1A6F2C43904100C5F66D /* AdminMessageTextView.swift */; };
 		468C1A732C43B92800C5F66D /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 468C1A722C43B92800C5F66D /* Kingfisher */; };
+		469A69CA2C5F6BDD0017E763 /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 469A69C92C5F6BDD0017E763 /* AlertKit */; };
 		46B804BF2C549F430091020E /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B804BE2C549F430091020E /* Haptics.swift */; };
 		46B804C12C55ED1D0091020E /* BubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46B804C02C55ED1D0091020E /* BubbleView.swift */; };
 		46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46E4F4422C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift */; };
@@ -180,6 +181,7 @@
 			files = (
 				46F377E72C39992000B9567D /* FirebaseDatabaseSwift in Frameworks */,
 				46F377FD2C3A43BF00B9567D /* FirebaseStorage in Frameworks */,
+				469A69CA2C5F6BDD0017E763 /* AlertKit in Frameworks */,
 				46F377E52C39992000B9567D /* FirebaseDatabase in Frameworks */,
 				46F377E32C39992000B9567D /* FirebaseAuth in Frameworks */,
 				468C1A732C43B92800C5F66D /* Kingfisher in Frameworks */,
@@ -598,6 +600,7 @@
 				46F377E62C39992000B9567D /* FirebaseDatabaseSwift */,
 				46F377FC2C3A43BF00B9567D /* FirebaseStorage */,
 				468C1A722C43B92800C5F66D /* Kingfisher */,
+				469A69C92C5F6BDD0017E763 /* AlertKit */,
 			);
 			productName = "IOS-WhatsAppClone";
 			productReference = 46E4F43F2C32E8A400A48C32 /* IOS-WhatsAppClone.app */;
@@ -674,6 +677,7 @@
 			packageReferences = (
 				46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				468C1A712C43B92800C5F66D /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				469A69C82C5F6BDD0017E763 /* XCRemoteSwiftPackageReference "AlertKit" */,
 			);
 			productRefGroup = 46E4F4402C32E8A400A48C32 /* Products */;
 			projectDirPath = "";
@@ -1121,6 +1125,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		469A69C82C5F6BDD0017E763 /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/AlertKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.9;
+			};
+		};
 		46F377E12C39992000B9567D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
@@ -1136,6 +1148,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 468C1A712C43B92800C5F66D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		469A69C92C5F6BDD0017E763 /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 469A69C82C5F6BDD0017E763 /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
 		};
 		46F377E22C39992000B9567D /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;

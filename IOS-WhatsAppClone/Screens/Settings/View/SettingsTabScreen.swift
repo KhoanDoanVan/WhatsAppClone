@@ -44,12 +44,15 @@ struct SettingsTabScreen: View {
             .searchable(text: $searchText)
             .toolbar {
                 leadingNavItem()
+                trailingNavItem()
             }
+            .alert(isPresent: $viewModel.showProgressHUD, view: viewModel.progressHUDView)
+            .alert(isPresent: $viewModel.showSuccessHUD, view: viewModel.successHUDView)
         }
     }
 }
 
-extension SettingsTabScreen {
+extension SettingsTabScreen { 
     @ToolbarContentBuilder
     private func leadingNavItem() -> some ToolbarContent {
         ToolbarItem(placement: .topBarLeading) {
@@ -59,6 +62,17 @@ extension SettingsTabScreen {
                 }
             }
             .foregroundStyle(.red)
+        }
+    }
+    
+    @ToolbarContentBuilder
+    private func trailingNavItem() -> some ToolbarContent {
+        ToolbarItem(placement: .topBarTrailing) {
+            Button("Save") {
+                viewModel.uploadProfilePhoto()
+            }
+            .bold()
+            .disabled(viewModel.disableSaveButton)
         }
     }
 }
@@ -99,7 +113,7 @@ private struct SettingsHeaderView: View {
                 .frame(width: 55, height: 55)
                 .clipShape(Circle())
         } else {
-            CircularProfileImageView(nil, size: .custom(55))
+            CircularProfileImageView(currentUser.profileImageUrl, size: .custom(55))
         }
     }
     
