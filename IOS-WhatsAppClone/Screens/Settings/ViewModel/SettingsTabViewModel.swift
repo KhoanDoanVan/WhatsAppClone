@@ -17,6 +17,11 @@ final class SettingsTabViewModel: ObservableObject {
     @Published var profilePhoto: MediaAttachment?
     @Published var showProgressHUD: Bool = false
     @Published var showSuccessHUD: Bool = false
+    @Published var showUserInfoEditor: Bool = false
+    @Published var username = ""
+    @Published var bio = ""
+    
+    private var currentUser: UserItem
     
     private var subscription: AnyCancellable?
     
@@ -24,10 +29,13 @@ final class SettingsTabViewModel: ObservableObject {
     private(set) var successHUDView = AlertAppleMusic17View(title: "Profile Image Updated!", subtitle: nil, icon: .done)
     
     var disableSaveButton: Bool {
-        return profilePhoto == nil
+        return profilePhoto == nil || showProgressHUD
     }
     
-    init() {
+    init(_ currentUser: UserItem) {
+        self.currentUser = currentUser
+        self.username = currentUser.username
+        self.bio = currentUser.bio ?? ""
         onPhotoPickerSelection()
     }
     
@@ -77,6 +85,8 @@ final class SettingsTabViewModel: ObservableObject {
         /// Dismiss animation uploading image
         showProgressHUD = false 
         progressHUDView.dismiss()
+        currentUser.profileImageUrl = imageUrl.absoluteString
+        AuthManager.shared.authState.send(.loggedIn(currentUser))
         
         /// Disable Save Button with delay after 0.3s
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -85,5 +95,22 @@ final class SettingsTabViewModel: ObservableObject {
             self.selectedPhotoItem = nil
         }
         print("onUploadSuccess with url: \(imageUrl.absoluteString)")
+    }
+    
+    
+    func updateUsernameBio() {
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        
+        var dict: [String:Any] = [.bio: bio]
+        currentUser.bio = bio
+        
+        if !username.isEmptyOrWhiteSpace {
+            dict[.username] = username
+            currentUser.username = username
+        }
+        
+        FirebaseConstants.UserRef.child(currentUid).updateChildValues(dict)
+        AuthManager.shared.authState.send(.loggedIn(currentUser))
+        showSuccessHUD = true
     }
 }
