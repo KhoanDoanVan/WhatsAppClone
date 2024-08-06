@@ -42,11 +42,21 @@ final class ChatRoomViewModel : ObservableObject {
         return mediaAttachments.isEmpty && textMessage.isEmptyOrWhiteSpace
     }
     
+    // is checking whether the current environment is running within Xcode’s SwiftUI preview.
+    private var isPreviewMode: Bool {
+        return ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
+    }
+    
     init(_ channel: ChannelItem) {
         self.channel = channel
         listenToAuthState()
         onPhotoPickerSelection()
         setUpVoiceRecorderListeners()
+        
+        // Check current environment is running within Xcode's SwiftUI preview or not, if true is the messages is stub messages
+        if isPreviewMode {
+            messages = MessageItem.stubMessages
+        }
     }
     
     deinit {

@@ -44,6 +44,12 @@ final class MessageListController: UIViewController {
     private var subscriptions = Set<AnyCancellable>()
     private var lastScrollPosition: String?
     
+    // MARK: Custom Reactions Properties
+    private var startingFrame: CGRect?
+    private var blurView: UIVisualEffectView?
+    private var focusedView: UIView?
+    private var highlightedCell: UICollectionViewCell?
+    
     // UIKIT
     private lazy var pullToRefresh: UIRefreshControl = {
         let pullToRefresh = UIRefreshControl()
@@ -209,20 +215,101 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
-        let messageItem = viewModel.messages[indexPath.row]
         
-        // Show media player
-        switch messageItem.type {
-        case .video:
-            guard let videoURLString = messageItem.videoURL,
-                  let videoURL = URL(string: videoURLString)
-            else { return }
-            viewModel.showMediaPlayer(videoURL)
+        /// select the cell
+        guard let selectedCell = collectionView.cellForItem(at: indexPath) else { return }
+        
+        /// save the original frame of selectedCell has just clicked (postion xy , frame xy)
+        startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil)
+        
+        /// capture selectedView current into snapshotView
+        guard let snapshotCell = selectedCell.snapshotView(afterScreenUpdates: false) else { return }
+        
+        /// main frame for display the reaction will bubble the main chat room view
+        focusedView = UIView(frame: startingFrame ?? .zero)
+        guard let focusedView else { return }
+        focusedView.isUserInteractionEnabled = false
+        
+        /// set action dismiss function by onTapGesture
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissContextMenu))
+        
+        /// blur view
+        let blurEffect = UIBlurEffect(style: .regular)
+        blurView = UIVisualEffectView(effect: blurEffect)
+        guard let blurView else { return }
+        blurView.contentView.isUserInteractionEnabled = true
+        blurView.contentView.addGestureRecognizer(tapGesture) // at gesture for blur
+        blurView.alpha = 0
+        
+        /// assign highlightedCell for fix the junky bug when dismiss the reaction
+        highlightedCell = selectedCell
+        highlightedCell?.alpha = 0
+        
+        
+        /// get key window is entire window screen
+        guard let keyWindow = UIWindowScene.current?.keyWindow else { return }
+        
+        /// at view into keyWindow
+        keyWindow.addSubview(blurView)
+        keyWindow.addSubview(focusedView)
+        focusedView.addSubview(snapshotCell)
+        
+        /// cover blur entire the screen
+        blurView.frame = keyWindow.frame
+        
+        /// animation for display
+        UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn) {
             
+            blurView.alpha = 1
             
-        default:
-            break
+            /// set frame for object into keyWindow
+            focusedView.center.y = keyWindow.center.y // set the focused view center y-axis
+            snapshotCell.frame = focusedView.bounds
+        }
+        
+        
+        
+        
+//        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
+//        let messageItem = viewModel.messages[indexPath.row]
+//        
+//        // Show media player
+//        switch messageItem.type {
+//        case .video:
+//            guard let videoURLString = messageItem.videoURL,
+//                  let videoURL = URL(string: videoURLString)
+//            else { return }
+//            viewModel.showMediaPlayer(videoURL)
+//            
+//            
+//        default:
+//            break
+//        }
+    }
+    
+    @objc func dismissContextMenu() {
+        UIView.animate(
+            withDuration: 0.6,
+            delay: 0,
+            usingSpringWithDamping: 0.8,
+            initialSpringVelocity: 1,
+            options: .curveEaseOut
+        ) { [weak self] in
+            guard let self = self else { return }
+            /// set focusedView become to startingFrame at position begin
+            focusedView?.frame = startingFrame ?? .zero
+            blurView?.alpha = 0
+        } completion: { [weak self] _ in
+            /// disappear the focused view and display the main cell view to fix the junky display
+            self?.highlightedCell?.alpha = 1
+            /// remove out the window screen
+            self?.blurView?.removeFromSuperview()
+            self?.focusedView?.removeFromSuperview()
+            
+            // Clear Preference
+            self?.highlightedCell = nil
+            self?.blurView = nil
+            self?.focusedView = nil
         }
     }
     
