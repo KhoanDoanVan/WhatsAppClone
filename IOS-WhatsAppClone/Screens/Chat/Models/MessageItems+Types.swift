@@ -7,6 +7,56 @@
 
 import Foundation
 
+enum MessageMenuAction: String, CaseIterable, Identifiable {
+    case reply, forward, copy, delete
+    
+    var id: String {
+        return rawValue
+    }
+    
+    var systemImage: String {
+        switch self {
+        case .reply:
+            return "arrowshape.turn.up.left"
+        case .forward:
+            return "paperplane"
+        case .copy:
+            return "doc.on.doc"
+        case .delete:
+            return "trash"
+        }
+    }
+}
+
+enum Reaction: Int {
+    case like
+    case heart
+    case laugh
+    case shocked
+    case sad
+    case pray
+    case more
+    
+    var emoji: String {
+        switch self {
+        case .like:
+            return "👍"
+        case .heart:
+            return "❤️"
+        case .laugh:
+            return "😂"
+        case .shocked:
+            return "😮"
+        case .sad:
+            return "😢"
+        case .pray:
+            return "🙏"
+        case .more:
+            return "+"
+        }
+    }
+}
+
 enum AdminMessageType: String {
     case channelCreation
     case memberAdded

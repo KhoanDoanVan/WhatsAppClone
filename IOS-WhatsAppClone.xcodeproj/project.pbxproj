@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4633CA852C62FC0C0008E9BC /* ReactionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4633CA842C62FC0C0008E9BC /* ReactionPickerView.swift */; };
+		4633CA872C631C1A0008E9BC /* MessageMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4633CA862C631C1A0008E9BC /* MessageMenuView.swift */; };
 		463BBE5F2C3F87C500936277 /* ChannelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE5E2C3F87C500936277 /* ChannelItem.swift */; };
 		463BBE612C3F8F0400936277 /* ChannelTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */; };
 		463BBE652C40CC6F00936277 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 463BBE642C40CC6F00936277 /* String+Extensions.swift */; };
@@ -101,6 +103,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4633CA842C62FC0C0008E9BC /* ReactionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionPickerView.swift; sourceTree = "<group>"; };
+		4633CA862C631C1A0008E9BC /* MessageMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMenuView.swift; sourceTree = "<group>"; };
 		463BBE5E2C3F87C500936277 /* ChannelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelItem.swift; sourceTree = "<group>"; };
 		463BBE602C3F8F0400936277 /* ChannelTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelTabViewModel.swift; sourceTree = "<group>"; };
 		463BBE642C40CC6F00936277 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
@@ -504,6 +508,8 @@
 				46E4F4992C364BF400A48C32 /* BubbleTailView.swift */,
 				466291602C38003D00E0BF59 /* BubbleAudioView.swift */,
 				4687B7E82C480D7500C8EE8E /* MediaAttachmentPreview.swift */,
+				4633CA842C62FC0C0008E9BC /* ReactionPickerView.swift */,
+				4633CA862C631C1A0008E9BC /* MessageMenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -759,6 +765,7 @@
 				46F378092C3BE45500B9567D /* GroupChatPartnersScreen.swift in Sources */,
 				46E4F4432C32E8A400A48C32 /* IOS_WhatsAppCloneApp.swift in Sources */,
 				46F377FF2C3A47A300B9567D /* ChatPartnerPickerScreen.swift in Sources */,
+				4633CA872C631C1A0008E9BC /* MessageMenuView.swift in Sources */,
 				466B562E2C5DCEF3008A62A1 /* SettingsTabViewModel.swift in Sources */,
 				468C1A6E2C438ED100C5F66D /* ChannelCreationTextView.swift in Sources */,
 				465071082C53DF4B00645450 /* VoiceMessagePlayer.swift in Sources */,
@@ -772,6 +779,7 @@
 				46E4F4862C34FB9D00A48C32 /* SettingsItemView.swift in Sources */,
 				466291762C38297D00E0BF59 /* AuthTextField.swift in Sources */,
 				46E4F4982C364B1D00A48C32 /* BubbleTextView.swift in Sources */,
+				4633CA852C62FC0C0008E9BC /* ReactionPickerView.swift in Sources */,
 				46E4F4962C364A6600A48C32 /* MessageItem.swift in Sources */,
 				46E4F4812C34530D00A48C32 /* ChannelItemView.swift in Sources */,
 				467439A62C454D31000F37FE /* Date+Extensions.swift in Sources */,

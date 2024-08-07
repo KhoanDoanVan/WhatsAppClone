@@ -267,9 +267,6 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
             snapshotCell.frame = focusedView.bounds
         }
         
-        
-        
-        
 //        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
 //        let messageItem = viewModel.messages[indexPath.row]
 //        
