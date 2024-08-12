@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct MessageListView: UIViewControllerRepresentable {
+    
     typealias UIViewControllerType = MessageListController
     private var viewModel: ChatRoomViewModel
+    
     init(_ viewModel: ChatRoomViewModel) {
         self.viewModel = viewModel
     }

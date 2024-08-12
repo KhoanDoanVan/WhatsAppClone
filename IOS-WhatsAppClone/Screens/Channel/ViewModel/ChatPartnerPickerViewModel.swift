@@ -28,7 +28,7 @@ final class ChatPartnerPickerViewModel: ObservableObject {
     @Published var selectedChatPartners = [UserItem]()
     @Published private(set) var users = [UserItem]()
     @Published var errorState: (showError: Bool, errorMessage: String) = (false, "Uh oh")
-    
+
     private var lastCursor: String?
     private var userCurrent: UserItem?
     private var subscription: AnyCancellable?
