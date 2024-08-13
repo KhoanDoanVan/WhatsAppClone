@@ -21,6 +21,7 @@ final class MessageListController: UIViewController {
         view.backgroundColor = .clear
         setUpViews()
         setUpMessagesListeners()
+        setUpLongPressGestureRecorgnizer()
     }
     
     /// In Swift, the init method for a UIViewController subclass must ensure that all properties are initialized before calling super.init(nibName:bundle:).
@@ -217,9 +218,68 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+               
         
-        /// select the cell
-        guard let selectedCell = collectionView.cellForItem(at: indexPath) else { return }
+        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
+        let messageItem = viewModel.messages[indexPath.row]
+        
+        // Show media player
+        switch messageItem.type {
+        case .video:
+            guard let videoURLString = messageItem.videoURL,
+                  let videoURL = URL(string: videoURLString)
+            else { return }
+            viewModel.showMediaPlayer(videoURL)
+            
+            
+        default:
+            break
+        }
+    }
+    
+    // Handle scroll action (dislay button when user scroll over the contents)
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y <= 0 {
+            pullToDownHUBView.alpha = viewModel.isPaginatable ? 1 : 0
+            print("CollectionView is at the top: \(scrollView.contentOffset.y)")
+        } else {
+            pullToDownHUBView.alpha = 0
+            print("CollectionView is not at the top: \(scrollView.contentOffset.y)")
+        }
+    }
+
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+}
+
+// MARK: Context Menu Interactions
+extension MessageListController {
+    private func setUpLongPressGestureRecorgnizer() {
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showContextMenu))
+        
+        longPressGesture.minimumPressDuration = 0.5
+        messagesCollectionView.addGestureRecognizer(longPressGesture)
+    }
+    
+    @objc private func showContextMenu(_ gesture: UILongPressGestureRecognizer) {
+        
+        /// Avoid duplicate call this function twice times
+        guard gesture.state == .began else { return }
+        
+        /// Get the point current did selected
+        let point = gesture.location(in: messagesCollectionView)
+        guard let indexPath = messagesCollectionView.indexPathForItem(at: point) else { return  }
+        
+        /// Get message
+        let message = viewModel.messages[indexPath.item]
+        
+        /// If message is the admin type -> not excute the long press gesture
+        guard message.type.isAdminMessaage == false else { return }
+        
+        /// Select cell
+        guard let selectedCell = messagesCollectionView.cellForItem(at: indexPath) else { return }
         
         /// save the original frame of selectedCell has just clicked (postion xy , frame xy)
         startingFrame = selectedCell.superview?.convert(selectedCell.frame, to: nil)
@@ -260,8 +320,8 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
         blurView.frame = keyWindow.frame
         
         /// attach the menu view to bottom of the message view
-        let message = viewModel.messages[indexPath.item]
-        attachMenuAction(to: message, in: keyWindow)
+        let isNewDay = viewModel.isNewDay(for: message, at: indexPath.item)
+        attachMenuAction(to: message, in: keyWindow, isNewDay)
         
         /// animation for display
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn) {
@@ -275,25 +335,9 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
             /// Set shadow
             snapshotCell.layer.applyShadow(color: .gray, alpha: 0.2, x: 0, y: 2, blur: 4) // Extension in the bottom
         }
-        
-//        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
-//        let messageItem = viewModel.messages[indexPath.row]
-//        
-//        // Show media player
-//        switch messageItem.type {
-//        case .video:
-//            guard let videoURLString = messageItem.videoURL,
-//                  let videoURL = URL(string: videoURLString)
-//            else { return }
-//            viewModel.showMediaPlayer(videoURL)
-//            
-//            
-//        default:
-//            break
-//        }
     }
     
-    private func attachMenuAction(to message: MessageItem, in window: UIWindow) {
+    private func attachMenuAction(to message: MessageItem, in window: UIWindow, _ isNewDay: Bool) {
         /// Convert a swiftUI view to UIKit view
         guard let focusedView, let startingFrame else { return }
         
@@ -304,9 +348,12 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
         reactionHostVC.view.backgroundColor = .clear
         reactionHostVC.view.translatesAutoresizingMaskIntoConstraints = false
         
+        /// hidden the timestamp day if isNewDay
+        var reactionPadding: CGFloat = isNewDay ? 45 : 5
+        
         window.addSubview(reactionHostVC.view)
         /// bottom Anchor
-        reactionHostVC.view.bottomAnchor.constraint(equalTo: focusedView.topAnchor, constant: 5).isActive = true
+        reactionHostVC.view.bottomAnchor.constraint(equalTo: focusedView.topAnchor, constant: reactionPadding).isActive = true
         /// leading Anchor
         reactionHostVC.view.leadingAnchor.constraint(equalTo: focusedView.leadingAnchor, constant: 20).isActive = message.direction == .received
         /// trailing Anchor
@@ -361,86 +408,9 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
             self?.reactionHostVC = nil
         }
     }
-    
-    // Handle scroll action (dislay button when user scroll over the contents)
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.y <= 0 {
-            pullToDownHUBView.alpha = viewModel.isPaginatable ? 1 : 0
-            print("CollectionView is at the top: \(scrollView.contentOffset.y)")
-        } else {
-            pullToDownHUBView.alpha = 0
-            print("CollectionView is not at the top: \(scrollView.contentOffset.y)")
-        }
-    }
-    
-    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
-//        cell.backgroundColor = .clear
-//        cell.selectionStyle = .none
-//        
-//        let message = viewModel.messages[indexPath.row]
-//        
-//        /// UIHostingConfiguration is a part of UIKit that allows you to integrate SwiftUI views within a UITableViewCell or UICollectionViewCell. This makes it easier to use SwiftUI's declarative syntax and modern UI features within a UIKit-based project..
-//        cell.contentConfiguration = UIHostingConfiguration {
-//            switch message.type {
-//            case .text:
-//                BubbleTextView(item: message)
-//            case .video,.photo:
-//                BubbleImageView(item: message)
-//            case .audio:
-//                BubbleAudioView(item: message)
-//            case .admin(let adminType):
-//                switch adminType {
-//                case .channelCreation:
-//                    ChannelCreationTextView()
-//                    
-//                    if viewModel.channel.isGroupChat {
-//                        AdminMessageTextView(channel: viewModel.channel)
-//                    }
-//                default:
-//                    Text("Unknown")
-//                }
-//            } 
-//        }
-//        return cell
-//    }
-    
-    // Use a uikit for tableView, use a swiftui as the cell
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.messages.count
-//    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    // Click to message for play video type
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        
-//        UIApplication.dismissKeyboard() // dismiss the keyboard before play av video
-//        let messageItem = viewModel.messages[indexPath.row]
-//        
-//        // Show media player
-//        switch messageItem.type {
-//        case .video:
-//            guard let videoURLString = messageItem.videoURL,
-//                  let videoURL = URL(string: videoURLString)
-//            else { return }
-//            viewModel.showMediaPlayer(videoURL)
-//            
-//        case .audio:
-//            guard let audioUrlString = messageItem.audioURL,
-//                  let audioURL = URL(string: audioUrlString)
-//            else { return }
-//            viewModel.showMediaPlayer(audioURL)
-//            
-//        default:
-//            break
-//        }
-//    }
 }
 
+/// Extension of scroll to bottom action
 private extension UICollectionView {
     
     func scrollToLastItem(at scrollPosition: UICollectionView.ScrollPosition, animated: Bool) {
