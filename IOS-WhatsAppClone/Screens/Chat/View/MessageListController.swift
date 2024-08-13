@@ -256,6 +256,7 @@ extension MessageListController: UICollectionViewDelegate, UICollectionViewDataS
 
 // MARK: Context Menu Interactions
 extension MessageListController {
+    
     private func setUpLongPressGestureRecorgnizer() {
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(showContextMenu))
         
@@ -323,6 +324,10 @@ extension MessageListController {
         let isNewDay = viewModel.isNewDay(for: message, at: indexPath.item)
         attachMenuAction(to: message, in: keyWindow, isNewDay)
         
+        /// Check the message height wheather large more than main screen or not -> true -> shrink that message for display the emotion interaction
+        let shrinkCell = shrinkCell(startingFrame?.height ?? 0)
+        
+        
         /// animation for display
         UIView.animate(withDuration: 0.6, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 1, options: .curveEaseIn) {
             
@@ -334,12 +339,22 @@ extension MessageListController {
             
             /// Set shadow
             snapshotCell.layer.applyShadow(color: .gray, alpha: 0.2, x: 0, y: 2, blur: 4) // Extension in the bottom
+            
+            /// If shrink cell
+            if shrinkCell {
+                let xTranslation: CGFloat = message.direction == .received ? -80 : 80
+                let translation = CGAffineTransform(translationX: xTranslation, y: 0.5)
+                focusedView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5).concatenating(translation)
+            }
         }
     }
     
     private func attachMenuAction(to message: MessageItem, in window: UIWindow, _ isNewDay: Bool) {
         /// Convert a swiftUI view to UIKit view
         guard let focusedView, let startingFrame else { return }
+        
+        /// Check shrink cell
+        let shrinkCell = shrinkCell(startingFrame.height)
         
         // MARK: REACTION PICKER VIEW
         let reactionPickerView = ReactionPickerView(message: message)
@@ -348,8 +363,13 @@ extension MessageListController {
         reactionHostVC.view.backgroundColor = .clear
         reactionHostVC.view.translatesAutoresizingMaskIntoConstraints = false
         
-        /// hidden the timestamp day if isNewDay
+        /// hidden the timestamp date below the reaction component if isNewDay
         var reactionPadding: CGFloat = isNewDay ? 45 : 5
+        
+        /// decrease the padding after the message has just shrinked
+        if shrinkCell {
+            reactionPadding += (startingFrame.height / 3)
+        }
         
         window.addSubview(reactionHostVC.view)
         /// bottom Anchor
@@ -366,9 +386,15 @@ extension MessageListController {
         messageMenuHostVC.view.backgroundColor = .clear
         messageMenuHostVC.view.translatesAutoresizingMaskIntoConstraints = false
         
+        /// same thing reaction view controller above
+        var menuPadding: CGFloat = 0
+        if shrinkCell {
+            menuPadding -= (startingFrame.height / 2.5)
+        }
+        
         window.addSubview(messageMenuHostVC.view)
         /// top Anchor
-        messageMenuHostVC.view.topAnchor.constraint(equalTo: focusedView.bottomAnchor, constant: 0).isActive = true
+        messageMenuHostVC.view.topAnchor.constraint(equalTo: focusedView.bottomAnchor, constant: menuPadding).isActive = true
         /// leading Anchor
         messageMenuHostVC.view.leadingAnchor.constraint(equalTo: focusedView.leadingAnchor, constant: 20).isActive = message.direction == .received
         /// trailing Anchor
@@ -388,6 +414,9 @@ extension MessageListController {
             options: .curveEaseOut
         ) { [weak self] in
             guard let self = self else { return }
+            
+            focusedView?.transform = .identity
+            
             /// set focusedView become to startingFrame at position begin
             focusedView?.frame = startingFrame ?? .zero
             reactionHostVC?.view.removeFromSuperview()
@@ -407,6 +436,13 @@ extension MessageListController {
             self?.messageMenuHostVC = nil
             self?.reactionHostVC = nil
         }
+    }
+    
+    /// Check if height message more than will be shrink
+    private func shrinkCell(_ cellHeight: CGFloat) -> Bool {
+        let screenHeight = (UIWindowScene.current?.screenHeight ?? 0) / 1.2
+        let spacingForMenuView = screenHeight - cellHeight
+        return spacingForMenuView < 190
     }
 }
 
